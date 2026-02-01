@@ -1,0 +1,6 @@
+{
+  "appId": "com.rkscontroller.app",
+  "appName": "RKS Controller",
+  "webDir": "www",
+  "bundledWebRuntime": true
+}

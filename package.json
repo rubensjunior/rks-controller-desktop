@@ -1,0 +1,12 @@
+{
+  "name": "wappler_desktop_app",
+  "version": "1.0.0",
+  "dependencies": {
+    "@capacitor/core": "^7.4.3",
+    "@capacitor-community/electron": "*"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.5"
+  },
+  "author": "RKS Marketing e Tecnologia LTDA <contato@rkstechsolution.com.br>"
+}
