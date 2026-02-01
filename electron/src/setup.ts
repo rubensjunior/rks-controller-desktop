@@ -303,8 +303,30 @@ export function setupContentSecurityPolicy(customScheme: string): void {
         ...details.responseHeaders,
         'Content-Security-Policy': [
           electronIsDev
-            ? `default-src ${customScheme}://* 'unsafe-inline' devtools://* 'unsafe-eval' data:`
-            : `default-src ${customScheme}://* 'unsafe-inline' data:`,
+            ? `default-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* devtools://* data:;
+               script-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* 'unsafe-inline' 'unsafe-eval' blob:;
+               style-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* 'unsafe-inline';
+               connect-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* https://* ws://* wss://* devtools://*;
+               img-src 'self' data: ${customScheme}://* http://* https://*;
+               font-src 'self' data: ${customScheme}://* http://* https://*;
+               media-src 'self' ${customScheme}://* http://* https://*;
+               frame-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:*;
+               object-src 'none';
+               form-action 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:*;
+               frame-ancestors 'self';
+               worker-src 'self' ${customScheme}://* blob:;`
+            : `default-src 'self' ${customScheme}://* data:;
+               script-src 'self' ${customScheme}://* 'unsafe-inline' blob:;
+               style-src 'self' ${customScheme}://* 'unsafe-inline';
+               connect-src 'self' ${customScheme}://* https://* ws://* wss://*;
+               img-src 'self' data: ${customScheme}://* http://* https://*;
+               font-src 'self' data: ${customScheme}://* http://* https://*;
+               media-src 'self' ${customScheme}://* http://* https://*;
+               frame-src 'self' ${customScheme}://*;
+               object-src 'none';
+               form-action 'self' ${customScheme}://*;
+               frame-ancestors 'self';
+               worker-src 'self' ${customScheme}://* blob:;`,
         ],
       },
     });
