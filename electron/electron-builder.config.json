@@ -1,5 +1,5 @@
 {
-  "appId": "com.yourdoamnin.yourapp",
+  "appId": "com.rubensjunior.rkscontroller",
   "directories": {
     "buildResources": "resources"
   },
@@ -12,7 +12,8 @@
   "publish": {
     "provider": "github",
     "owner": "rubensjunior",
-    "repo": "rks-controller-desktop"
+    "repo": "rks-controller-desktop",
+    "releaseType": "release"
   },
   "nsis": {
     "allowElevation": true,
