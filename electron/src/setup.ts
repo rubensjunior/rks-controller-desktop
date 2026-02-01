@@ -18,6 +18,7 @@ const reloadWatcher = {
   ready: false,
   watcher: null,
 };
+
 export function setupReloadWatcher(electronCapacitorApp: ElectronCapacitorApp): void {
   reloadWatcher.watcher = chokidar
     .watch(join(app.getAppPath(), 'app'), {
@@ -51,10 +52,7 @@ export class ElectronCapacitorApp {
   private TrayMenuTemplate: (MenuItem | MenuItemConstructorOptions)[] = [
     new MenuItem({ label: 'Quit App', role: 'quit' }),
   ];
-  private AppMenuBarMenuTemplate: (MenuItem | MenuItemConstructorOptions)[] = [
-    { role: process.platform === 'darwin' ? 'appMenu' : 'fileMenu' },
-    { role: 'viewMenu' },
-  ];
+  private AppMenuBarMenuTemplate: (MenuItem | MenuItemConstructorOptions)[] = [];
   private mainWindowState;
   private loadWebApp;
   private customScheme: string;
@@ -66,7 +64,8 @@ export class ElectronCapacitorApp {
   ) {
     this.CapacitorFileConfig = capacitorFileConfig;
 
-    this.customScheme = this.CapacitorFileConfig.electron?.customUrlScheme ?? 'capacitor-electron';
+    this.customScheme =
+      this.CapacitorFileConfig.electron?.customUrlScheme ?? 'capacitor-electron';
 
     if (trayMenuTemplate) {
       this.TrayMenuTemplate = trayMenuTemplate;
@@ -76,19 +75,17 @@ export class ElectronCapacitorApp {
       this.AppMenuBarMenuTemplate = appMenuBarMenuTemplate;
     }
 
-    // Setup our web app loader, this lets us load apps like react, vue, and angular without changing their build chains.
+    // Setup our web app loader
     this.loadWebApp = electronServe({
       directory: join(app.getAppPath(), 'app'),
       scheme: this.customScheme,
     });
   }
 
-  // Helper function to load in the app.
   private async loadMainWindow(thisRef: any) {
     await thisRef.loadWebApp(thisRef.MainWindow);
   }
 
-  // Expose the mainWindow ref for use outside of the class.
   getMainWindow(): BrowserWindow {
     return this.MainWindow;
   }
@@ -99,16 +96,35 @@ export class ElectronCapacitorApp {
 
   async init(): Promise<void> {
     const icon = nativeImage.createFromPath(
-      join(app.getAppPath(), 'assets', process.platform === 'win32' ? 'appIcon.ico' : 'appIcon.png')
+      join(
+        app.getAppPath(),
+        'assets',
+        process.platform === 'win32' ? 'appIcon.ico' : 'appIcon.png'
+      )
     );
+
     this.mainWindowState = windowStateKeeper({
       defaultWidth: 1000,
       defaultHeight: 800,
     });
-    // Setup preload script path and construct our main window.
+
     const preloadPath = join(app.getAppPath(), 'build', 'src', 'preload.js');
+
+    const titleBarConfig =
+      process.platform === 'darwin'
+        ? { titleBarStyle: 'hiddenInset' as const }
+        : {
+          titleBarStyle: 'hidden' as const,
+          titleBarOverlay: {
+            color: '#000000',
+            symbolColor: '#ffffff',
+            height: 30,
+          },
+        };
+
     this.MainWindow = new BrowserWindow({
       icon,
+      ...titleBarConfig,
       show: false,
       x: this.mainWindowState.x,
       y: this.mainWindowState.y,
@@ -117,61 +133,56 @@ export class ElectronCapacitorApp {
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: true,
-        // Use preload to inject the electron varriant overrides for capacitor plugins.
-        // preload: join(app.getAppPath(), "node_modules", "@capacitor-community", "electron", "dist", "runtime", "electron-rt.js"),
         preload: preloadPath,
       },
     });
+
     this.mainWindowState.manage(this.MainWindow);
 
     if (this.CapacitorFileConfig.backgroundColor) {
-      this.MainWindow.setBackgroundColor(this.CapacitorFileConfig.electron.backgroundColor);
+      this.MainWindow.setBackgroundColor(
+        this.CapacitorFileConfig.electron.backgroundColor
+      );
     }
 
-    // If we close the main window with the splashscreen enabled we need to destory the ref.
     this.MainWindow.on('closed', () => {
-      if (this.SplashScreen?.getSplashWindow() && !this.SplashScreen.getSplashWindow().isDestroyed()) {
+      if (
+        this.SplashScreen?.getSplashWindow() &&
+        !this.SplashScreen.getSplashWindow().isDestroyed()
+      ) {
         this.SplashScreen.getSplashWindow().close();
       }
     });
 
-    // When the tray icon is enabled, setup the options.
     if (this.CapacitorFileConfig.electron?.trayIconAndMenuEnabled) {
       this.TrayIcon = new Tray(icon);
       this.TrayIcon.on('double-click', () => {
-        if (this.MainWindow) {
-          if (this.MainWindow.isVisible()) {
-            this.MainWindow.hide();
-          } else {
-            this.MainWindow.show();
-            this.MainWindow.focus();
-          }
-        }
+        if (!this.MainWindow) return;
+        this.MainWindow.isVisible()
+          ? this.MainWindow.hide()
+          : this.MainWindow.show();
       });
       this.TrayIcon.on('click', () => {
-        if (this.MainWindow) {
-          if (this.MainWindow.isVisible()) {
-            this.MainWindow.hide();
-          } else {
-            this.MainWindow.show();
-            this.MainWindow.focus();
-          }
-        }
+        if (!this.MainWindow) return;
+        this.MainWindow.isVisible()
+          ? this.MainWindow.hide()
+          : this.MainWindow.show();
       });
       this.TrayIcon.setToolTip(app.getName());
-      this.TrayIcon.setContextMenu(Menu.buildFromTemplate(this.TrayMenuTemplate));
+      this.TrayIcon.setContextMenu(
+        Menu.buildFromTemplate(this.TrayMenuTemplate)
+      );
     }
 
-    // Setup the main manu bar at the top of our window.
-    Menu.setApplicationMenu(Menu.buildFromTemplate(this.AppMenuBarMenuTemplate));
+    Menu.setApplicationMenu(null);
 
-    // If the splashscreen is enabled, show it first while the main window loads then switch it out for the main window, or just load the main window from the start.
     if (this.CapacitorFileConfig.electron?.splashScreenEnabled) {
       this.SplashScreen = new CapacitorSplashScreen({
         imageFilePath: join(
           app.getAppPath(),
           'assets',
-          this.CapacitorFileConfig.electron?.splashScreenImageName ?? 'splash.png'
+          this.CapacitorFileConfig.electron?.splashScreenImageName ??
+          'splash.png'
         ),
         windowWidth: 400,
         windowHeight: 400,
@@ -181,24 +192,22 @@ export class ElectronCapacitorApp {
       this.loadMainWindow(this);
     }
 
-    // Security
+    this.setupTitleBar();
+
     this.MainWindow.webContents.setWindowOpenHandler((details) => {
-      if (!details.url.includes(this.customScheme)) {
-        return { action: 'deny' };
-      } else {
-        return { action: 'allow' };
-      }
+      return details.url.includes(this.customScheme)
+        ? { action: 'allow' }
+        : { action: 'deny' };
     });
-    this.MainWindow.webContents.on('will-navigate', (event, _newURL) => {
+
+    this.MainWindow.webContents.on('will-navigate', (event) => {
       if (!this.MainWindow.webContents.getURL().includes(this.customScheme)) {
         event.preventDefault();
       }
     });
 
-    // Link electron plugins into the system.
     setupCapacitorElectronPlugins();
 
-    // When the web app is loaded we hide the splashscreen if needed and show the mainwindow.
     this.MainWindow.webContents.on('dom-ready', () => {
       if (this.CapacitorFileConfig.electron?.splashScreenEnabled) {
         this.SplashScreen.getSplashWindow().hide();
@@ -210,8 +219,78 @@ export class ElectronCapacitorApp {
         if (electronIsDev) {
           this.MainWindow.webContents.openDevTools();
         }
-        CapElectronEventEmitter.emit('CAPELECTRON_DeeplinkListenerInitialized', '');
+        CapElectronEventEmitter.emit(
+          'CAPELECTRON_DeeplinkListenerInitialized',
+          ''
+        );
       }, 400);
+    });
+  }
+
+  // 🔥 TITLE BAR PRETA COM TEXTO BRANCO (WINDOWS)
+  private setupTitleBar(): void {
+    const HEIGHT = 30;
+    const TITLE = app.getName();
+
+    const applyStyles = () => {
+      this.MainWindow.webContents.insertCSS(`
+      /* Evita scroll fantasma no wrapper */
+      html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        overflow: hidden !important;
+      }
+
+      /* Compensa a barra (empurra o app para baixo) */
+      body {
+        box-sizing: border-box !important;
+        padding-top: ${HEIGHT}px !important;
+      }
+
+      /* Barra preta (região arrastável) */
+      body::before {
+        content: '' !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: ${HEIGHT}px !important;
+        background: #000000 !important;
+        z-index: 999999 !important;
+        -webkit-app-region: drag !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Título branco */
+      body::after {
+        content: '${TITLE}' !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 12px !important;
+        right: 140px !important;
+        height: ${HEIGHT}px !important;
+        display: flex !important;
+        align-items: center !important;
+        color: #ffffff !important;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+        font-size: 12.5px !important;
+        font-weight: 500 !important;
+        z-index: 1000000 !important;
+        pointer-events: none !important;
+      }
+    `);
+    };
+
+    applyStyles();
+
+    this.MainWindow.webContents.on('did-navigate', () => {
+      setTimeout(applyStyles, 50);
+    });
+
+    this.MainWindow.webContents.on('did-finish-load', () => {
+      setTimeout(applyStyles, 50);
     });
   }
 }
