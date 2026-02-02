@@ -13,8 +13,8 @@
             <div class="row align-items-center justify-content-end">
                 <div class="col-8 bg-white rounded-4 p-5">
                     <h3>RKS Controller</h3>
-                    <p class="mb-4 text-muted">Seja bem-vindo(a): {{usuario.data.id}}</p>
-                    <form id="form1" is="dmx-serverconnect-form" method="post" action="http://localhost:3000/api/cliente/login" site="rks-controller" dmx-on:error="notificacoes.danger('Ocorreu um erro!')" dmx-on:success="usuario.set('id',form1.data.identity)">
+                    <p class="mb-4 text-muted">Seja bem-vindo(a)</p>
+                    <form id="form1" is="dmx-serverconnect-form" method="post" action="http://localhost:3000/api/cliente/login" site="rks-controller" dmx-on:error="notificacoes.danger('Ocorreu um erro!')" dmx-on:success="usuario.set('id',form1.data.identity);navegacao.goto('interno/backoffice.html')">
                         <div class="form-group mb-3"> <label for="email_ipt" class="form-label">E-mail</label>
                             <input type="email" class="form-control py-2" id="email_ipt" name="email_ipt" aria-describedby="input1_help" required="" data-msg-required="Este é um campo obrigatório!" data-rule-email="" data-msg-email="Insira um e-mail válido!">
                         </div>
