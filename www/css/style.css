@@ -13,15 +13,34 @@
 /* Navigation Dropdown Styles */
 .nav-item.dropdown .nav-link {
     padding: 0.5rem 0.75rem !important;
+    font-size: 13px !important;
     color: #ffffff !important;
     transition: all 0.2s ease;
     display: inline-block;
     margin-right: 0.5rem;
     background-color: transparent !important;
     border: none !important;
+    text-transform: uppercase !important;
 }
 
 .nav-item.dropdown .nav-link:hover {
+    color: #ffffff !important;
+}
+
+/* Navigation Link Styles */
+.nav-item.nav-link {
+    padding: 0.5rem 0.75rem !important;
+    color: #ffffff !important;
+    transition: all 0.2s ease;
+    display: inline-block;
+    margin-right: 0.5rem;
+    background-color: transparent !important;
+    border: none !important;
+    font-size: 13px !important;
+    text-transform: uppercase !important;
+}
+
+.nav-item.nav-link:hover {
     color: #ffffff !important;
 }
 
@@ -44,8 +63,9 @@
     padding: 0.75rem 1rem;
     transition: all 0.15s ease;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    font-size: 0.95rem;
+    font-size: 13px !important;
     background-color: transparent;
+    text-transform: uppercase !important;
 }
 
 .nav-item.dropdown .dropdown-item:last-child {
@@ -64,6 +84,11 @@
     color: #ffffff;
 }
 
+/* Adiciona estilos específicos para elementos dropdown-item */
+.nav-item.dropdown a.dropdown-item {
+    font-size: 13px !important;
+}
+
 /* Profile Menu Dropdown Styles */
 .profile-dropdown {
     position: relative;
@@ -74,9 +99,10 @@
     align-items: center;
     gap: 0.75rem;
     padding: 0.5rem 0.75rem;
-    border-radius: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: transparent;
+    border: none !important;
+    outline: none !important;
+    border-radius: 0 !important;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
@@ -85,12 +111,10 @@
 
 .profile-toggle:hover {
     background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .profile-toggle.show {
     background-color: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .profile-info {
@@ -259,4 +283,9 @@
     .nav-item.dropdown .dropdown-menu {
         min-width: 150px;
     }
+}
+.subtitulo{
+    font-size: 13px;
+}.bg-cinza{
+    background-color: #F4F6FA;
 }

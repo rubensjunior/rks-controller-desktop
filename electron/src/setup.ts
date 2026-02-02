@@ -305,10 +305,10 @@ export function setupContentSecurityPolicy(customScheme: string): void {
           electronIsDev
             ? `default-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* devtools://* data:;
                script-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* 'unsafe-inline' 'unsafe-eval' blob:;
-               style-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* 'unsafe-inline';
+               style-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* 'unsafe-inline' https://fonts.googleapis.com;
                connect-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* https://* ws://* wss://* devtools://*;
                img-src 'self' data: ${customScheme}://* http://* https://*;
-               font-src 'self' data: ${customScheme}://* http://* https://*;
+               font-src 'self' data: ${customScheme}://* http://* https://* https://fonts.googleapis.com https://fonts.gstatic.com;
                media-src 'self' ${customScheme}://* http://* https://*;
                frame-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:*;
                object-src 'none';
@@ -317,10 +317,10 @@ export function setupContentSecurityPolicy(customScheme: string): void {
                worker-src 'self' ${customScheme}://* blob:;`
             : `default-src 'self' ${customScheme}://* data:;
                script-src 'self' ${customScheme}://* 'unsafe-inline' blob:;
-               style-src 'self' ${customScheme}://* 'unsafe-inline';
+               style-src 'self' ${customScheme}://* 'unsafe-inline' https://fonts.googleapis.com;
                connect-src 'self' ${customScheme}://* https://* ws://* wss://*;
                img-src 'self' data: ${customScheme}://* http://* https://*;
-               font-src 'self' data: ${customScheme}://* http://* https://*;
+               font-src 'self' data: ${customScheme}://* http://* https://* https://fonts.googleapis.com https://fonts.gstatic.com;
                media-src 'self' ${customScheme}://* http://* https://*;
                frame-src 'self' ${customScheme}://*;
                object-src 'none';
