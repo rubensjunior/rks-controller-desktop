@@ -1,4 +1,4 @@
-.bg-inicial{
+.bg-inicial {
     background-image: 
         linear-gradient(90deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 60%),
         url(../assets/images/bg-inicial.jpg);
@@ -7,193 +7,16 @@
     background-size: cover;
     background-attachment: fixed;
 }
-
-.bg-cinza{
-    background-image: 
+.bg-cinza {
+    /*background-image: 
         linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%),
         url(../assets/images/bg-inicial.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
+    background-attachment: fixed;*/
+    background-color: #F3F6F9;
 }
-
-.bg-black{
-  background-color: #0B0C10;
-}
-
-/* ========================================
-   NAVBAR STYLES - SIMPLE & CLEAN
-   ======================================== */
-
-/* Navbar Container */
-.navbar {
-    box-shadow: 0 2px 10px rgba(0, 212, 255, 0.1);
-    padding: 0.8rem 0;
-}
-
-.navbar-brand {
-    font-size: 1.5rem;
-    letter-spacing: 0.05em;
-    transition: all 0.3s ease;
-}
-
-.navbar-brand:hover {
-    color: #00d4ff !important;
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-}
-
-/* Nav Links */
-.navbar-nav .nav-link {
-    color: #ffffff !important;
+.subtitulo{
     font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0.5rem 1rem !important;
-    margin: 0 0.25rem;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.navbar-nav .nav-link:hover {
-    color: #00d4ff !important;
-    text-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
-}
-
-.navbar-nav .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background-color: #00d4ff;
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-}
-
-.navbar-nav .nav-link:hover::after {
-    width: 80%;
-}
-
-/* Dropdown Links */
-.navbar-nav .dropdown-toggle {
-    cursor: pointer;
-}
-
-.navbar-nav .dropdown-toggle::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background-color: #00d4ff;
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-}
-
-.navbar-nav .dropdown-toggle:hover::after {
-    width: 80%;
-}
-
-/* Dropdown Menu Styles */
-.dropdown-menu {
-    background-color: rgba(11, 12, 16, 0.98) !important;
-    border: 1px solid #333333 !important;
-    border-radius: 0.5rem;
-    padding: 0.5rem 0;
-    animation: slideDown 0.2s ease;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.dropdown-menu .dropdown-item {
-    color: #ffffff;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    padding: 0.6rem 1.5rem;
-    transition: all 0.2s ease;
-}
-
-.dropdown-menu .dropdown-item:hover {
-    background-color: rgba(0, 212, 255, 0.1);
-    color: #00d4ff;
-    padding-left: 2rem;
-}
-
-.dropdown-menu .dropdown-divider {
-    border-color: #333333;
-    margin: 0.25rem 0;
-}
-
-/* Navbar Toggler (Mobile) */
-.navbar-toggler {
-    border: none;
-    padding: 0.5rem 0.75rem;
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%2300d4ff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
-
-.navbar-toggler:focus {
-    outline: none;
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 991px) {
-    .navbar-nav {
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-    }
-
-    .navbar-nav .nav-link {
-        padding: 0.7rem 1rem !important;
-    }
-
-    .navbar-nav .nav-link::after {
-        display: none;
-    }
-
-    .navbar-nav .nav-link:hover::after {
-        display: none;
-    }
-
-    .navbar-collapse {
-        background-color: rgba(11, 12, 16, 0.95);
-        border-top: 1px solid #333333;
-        margin-top: 0.5rem;
-        padding-top: 1rem;
-    }
-}
-
-/* Active Link State */
-.navbar-nav .nav-link.active {
-    color: #00d4ff !important;
-}
-
-/* Main Content Area */
-main[is="dmx-view"] {
-    min-height: 100vh;
-}
-
-/* Utility Classes */
-.fw-5 {
-    font-weight: 500;
-}
-
-.text-cyan {
-    color: #00d4ff !important;
 }

@@ -116,7 +116,7 @@ export class ElectronCapacitorApp {
         : {
           titleBarStyle: 'hidden' as const,
           titleBarOverlay: {
-            color: '#000000',
+            color: '#0D0F17',
             symbolColor: '#ffffff',
             height: 30,
           },
@@ -257,7 +257,7 @@ export class ElectronCapacitorApp {
         left: 0 !important;
         right: 0 !important;
         height: ${HEIGHT}px !important;
-        background: #000000 !important;
+        background: #0D0F17 !important;
         z-index: 999999 !important;
         -webkit-app-region: drag !important;
         box-sizing: border-box !important;

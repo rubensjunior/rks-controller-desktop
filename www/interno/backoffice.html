@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+    <script src="../dmxAppConnect/dmxAppConnect.js"></script>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../bootstrap/5/css/bootstrap.min.css" />
+    <script src="../capacitor.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../dmxAppConnect/dmxRouting/dmxRouting.js" defer></script>
+    <script src="../js/routes.js" defer></script>
+    <script src="../dmxAppConnect/dmxBootstrap5Navigation/dmxBootstrap5Navigation.js" defer></script>
+    <script src="../dmxAppConnect/dmxStateManagement/dmxStateManagement.js" defer></script>
+    <script src="../dmxAppConnect/dmxBrowser/dmxBrowser.js" defer></script>
+</head>
+
+<body is="dmx-app" id="backoffice" class="bg-cinza">
+    <div is="dmx-browser" id="navegacao"></div>
+    <dmx-local-manager id="usuario"></dmx-local-manager>
+    <header class="p-3 bg-dark ps-0">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="nav w-100">
+                        <a class="nav-item nav-link text-white" href="/interno/home" internal="true">Dashboard</a>
+                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" id="dropdown1" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault()">Cadastros</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown1">
+                                <a class="dropdown-item" href="/interno/departamentos" internal="true">Departamentos</a>
+                                <a class="dropdown-item" href="/interno/fornecedores" internal="true">Fornecedores</a>
+                                <a class="dropdown-item" href="/interno/fontes-financiamento" internal="true">Fontes de Financiamento</a>
+                            </div>
+                        </div>
+                        <a class="nav-item nav-link text-danger" href="#" dmx-on:click="usuario.removeAll();navegacao.goto('../index.html')">Sair</a>
+                    </div>
+                </div>
+                <div class="col text-end">
+                    <div class="dropdown">
+                        <button id="dropdown2" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown button
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdown2">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main is="dmx-view" id="view1"></main>
+    <script src="../bootstrap/5/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

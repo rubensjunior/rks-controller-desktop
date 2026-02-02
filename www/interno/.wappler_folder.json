@@ -10,5 +10,13 @@
   "departamentos.html": {
     "layoutPage": "",
     "description": ""
+  },
+  "fornecedores.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "fontes-financiamento.html": {
+    "layoutPage": "",
+    "description": ""
   }
 }
