@@ -14,9 +14,16 @@
 	<link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="dmxAppConnect/dmxValidator/dmxValidator.css" />
 	<script src="dmxAppConnect/dmxValidator/dmxValidator.js" defer></script>
+	<link rel="stylesheet" href="dmxAppConnect/dmxNotifications/dmxNotifications.css" />
+	<script src="dmxAppConnect/dmxNotifications/dmxNotifications.js" defer></script>
+	<script src="dmxAppConnect/dmxBrowser/dmxBrowser.js" defer></script>
+	<script src="dmxAppConnect/dmxStateManagement/dmxStateManagement.js" defer></script>
 </head>
 
 <body is="dmx-app" id="index" class="bg-inicial" dmx-routing="routes.js">
+	<dmx-local-manager id="usuario"></dmx-local-manager>
+	<div is="dmx-browser" id="navegacao"></div>
+	<dmx-notifications id="notificacoes"></dmx-notifications>
 	<dmx-serverconnect id="serverconnect1" url="http://localhost:3000/api/cliente/login" site="rks-controller"></dmx-serverconnect>
 	<main is="dmx-view" id="view1"></main>
 	<script src="bootstrap/5/js/bootstrap.bundle.min.js"></script>
