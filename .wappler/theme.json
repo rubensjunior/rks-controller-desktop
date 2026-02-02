@@ -1,0 +1,11 @@
+{
+  "bootstrap5": {
+    "basic": {
+      "dark": "#17191E",
+      "body-color": "#17191E",
+      "headings-font-family": "Inter:600",
+      "font-family-base": "Inter:400"
+    },
+    "advanced": {}
+  }
+}
