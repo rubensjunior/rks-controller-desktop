@@ -13,44 +13,120 @@
     <script src="../dmxAppConnect/dmxRouting/dmxRouting.js" defer></script>
     <script src="../js/routes.js" defer></script>
     <script src="../dmxAppConnect/dmxBootstrap5Navigation/dmxBootstrap5Navigation.js" defer></script>
+    <script src="../dmxAppConnect/dmxStateManagement/dmxStateManagement.js" defer></script>
 </head>
 
 <body is="dmx-app" id="backoffice">
-    <header class="bg-black">
-        <div class="container">
+    <!-- Initialize user data on page load -->
+    <script>
+        const DEFAULT_AVATAR = '../assets/images/avatar.jpg';
+        const DEFAULT_AVATAR_SVG = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23999%22%3E%3Cpath d=%22M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z%22/%3E%3C/svg%3E';
+
+        // Handle image loading errors
+        function handleImageError(img) {
+            console.warn('Erro ao carregar imagem:', img.src);
+            img.src = DEFAULT_AVATAR_SVG;
+        }
+
+        // Toggle Profile Menu
+        function toggleProfileMenu() {
+            const dropdown = document.getElementById('profile_dropdown');
+            if (dropdown) {
+                dropdown.classList.toggle('active');
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function closeMenu(e) {
+                    if (!dropdown.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                        document.removeEventListener('click', closeMenu);
+                    }
+                });
+            }
+        }
+
+        // Close profile menu when an item is clicked
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuItems = document.querySelectorAll('.profile-menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (this.tagName === 'A') {
+                        e.preventDefault();
+                    }
+                    const dropdown = document.getElementById('profile_dropdown');
+                    if (dropdown) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Logout function
+        function logout() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                // Limpar dados do usuário
+                const usuarioElement = document.querySelector('[id="usuario"]');
+                if (usuarioElement && usuarioElement.dmxComponent) {
+                    usuarioElement.dmxComponent.removeAll();
+                } else {
+                    localStorage.removeItem('usuario');
+                }
+                // Redirecionar para login
+                setTimeout(() => {
+                    window.location.href = '../login.html';
+                }, 300);
+            }
+        }
+
+        // Set user data example
+        function setUserData(nome, empresa, avatar) {
+            const usuarioElement = document.querySelector('[id="usuario"]');
+            if (usuarioElement && usuarioElement.dmxComponent) {
+                usuarioElement.dmxComponent.set('nome', nome);
+                usuarioElement.dmxComponent.set('empresa', empresa);
+                if (avatar) {
+                    usuarioElement.dmxComponent.set('avatar', avatar);
+                }
+            } else {
+                const userData = {
+                    nome: nome,
+                    empresa: empresa
+                };
+                if (avatar) {
+                    userData.avatar = avatar;
+                }
+                localStorage.setItem('usuario', JSON.stringify(userData));
+            }
+        }
+    </script>
+    <dmx-local-manager id="usuario"></dmx-local-manager>
+    <header class="bg-black border-top border-secondary">
+        <div class="container-fluid p-3">
             <div class="row align-items-center">
                 <div class="col">
                     <div class="nav w-100">
-                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdown1" role="button" aria-haspopup="true" aria-expanded="false">Gastos</a>
+                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" id="dropdown1" role="button" aria-haspopup="true" aria-expanded="false">Gastos</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown1">
                                 <a class="dropdown-item" href="#">Action</a>
                                 <a class="dropdown-item" href="#">Another action</a>
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </div>
-                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdown2" role="button" aria-haspopup="true" aria-expanded="false">Projetos</a>
+                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" id="dropdown2" role="button" aria-haspopup="true" aria-expanded="false">Projetos</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown2">
                                 <a class="dropdown-item" href="#">Action</a>
                                 <a class="dropdown-item" href="#">Another action</a>
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </div>
-                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdown3" role="button" aria-haspopup="true" aria-expanded="false">Cadastros</a>
+                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" id="dropdown3" role="button" aria-haspopup="true" aria-expanded="false">Relatórios</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown3">
                                 <a class="dropdown-item" href="#">Action</a>
                                 <a class="dropdown-item" href="#">Another action</a>
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </div>
-                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdown4" role="button" aria-haspopup="true" aria-expanded="false">Cadastros</a>
+                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" id="dropdown4" role="button" aria-haspopup="true" aria-expanded="false">Configurações</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown4">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdown5" role="button" aria-haspopup="true" aria-expanded="false">Configurações</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown5">
                                 <a class="dropdown-item" href="#">Action</a>
                                 <a class="dropdown-item" href="#">Another action</a>
                                 <a class="dropdown-item" href="#">Something else here</a>
@@ -59,11 +135,43 @@
                     </div>
 
                 </div>
-                <div class="col"></div>
+                <div class="col">
+                    <div class="d-flex flex-row justify-content-end">
+                        <div class="profile-dropdown" id="profile_dropdown">
+                            <button class="profile-toggle" onclick="toggleProfileMenu()" type="button">
+                                <div class="profile-info">
+                                    <h6 class="profile-user-name" dmx-text="usuario.nome || 'Usuário'"></h6>
+                                    <p class="profile-company-name" dmx-text="usuario.empresa || 'Empresa'"></p>
+                                </div>
+                                <div class="profile-avatar">
+                                    <img id="profile_img" src="../assets/images/avatar.jpg" alt="Avatar" class="rounded-2" dmx-bind:src="usuario.avatar || '../assets/images/avatar.jpg'" onerror="handleImageError(this)" crossorigin="anonymous">
+                                </div>
+                            </button>
+                            <div class="profile-menu">
+                                <a href="#" class="profile-menu-item">
+                                    <i class="bi bi-person-circle"></i>
+                                    <span>Meu Perfil</span>
+                                </a>
+                                <a href="#" class="profile-menu-item">
+                                    <i class="bi bi-gear"></i>
+                                    <span>Configurações</span>
+                                </a>
+                                <a href="#" class="profile-menu-item">
+                                    <i class="bi bi-question-circle"></i>
+                                    <span>Ajuda</span>
+                                </a>
+                                <button class="profile-menu-item">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    <span>Sair</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
-    <main is="dmx-view" id="view1"></main>
+    <main is="dmx-view" id="view1" class="p-3"></main>
     <script src="../bootstrap/5/js/bootstrap.bundle.min.js"></script>
 </body>
 
