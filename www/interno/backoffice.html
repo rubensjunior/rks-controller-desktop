@@ -15,11 +15,18 @@
     <script src="../dmxAppConnect/dmxBootstrap5Navigation/dmxBootstrap5Navigation.js" defer></script>
     <script src="../dmxAppConnect/dmxStateManagement/dmxStateManagement.js" defer></script>
     <script src="../dmxAppConnect/dmxBrowser/dmxBrowser.js" defer></script>
+    <link rel="stylesheet" href="../dmxAppConnect/dmxNotifications/dmxNotifications.css" />
+    <script src="../dmxAppConnect/dmxNotifications/dmxNotifications.js" defer></script>
+    <script src="../dmxAppConnect/dmxBootstrap5Offcanvas/dmxBootstrap5Offcanvas.js" defer></script>
+    <script src="../dmxAppConnect/dmxBootstrap5Modal/dmxBootstrap5Modal.js" defer></script>
 </head>
 
 <body is="dmx-app" id="backoffice" class="bg-cinza">
+
+    <dmx-notifications id="notificacoes"></dmx-notifications>
     <div is="dmx-browser" id="navegacao"></div>
     <dmx-local-manager id="usuario"></dmx-local-manager>
+    <dmx-serverconnect id="usuario_atual" url="http://localhost:3000/api/electron/perfil-usuario" site="rks-controller" dmx-param:id="usuario.data.id"></dmx-serverconnect>
     <header class="p-3 bg-dark ps-0">
         <div class="container-fluid">
             <div class="row align-items-center">

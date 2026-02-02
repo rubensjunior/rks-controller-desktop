@@ -1,4 +1,29 @@
-<!-- Wappler include head-page="backoffice.html" is="dmx-app" id="departamentos" appConnect="local" bootstrap5="local" capacitor="local" -->
+<!-- Wappler include head-page="backoffice.html" is="dmx-app" id="departamentos" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Offcanvas:{},dmxBootstrap5Modal:{}}" -->
+<div class="modal" id="modal_departamento" is="dmx-bs5-modal" tabindex="-1" nocloseonclick="true" nokeyboard="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastro de departamento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form_departamento">
+                    <div class="form-group mb-3"> <label for="nome_departamento_ipt" class="form-label">Nome do departamento</label>
+                        <input type="text" class="form-control py-2" id="nome_departamento_ipt" name="nome_departamento_ipt" aria-describedby="input1_help">
+                        <input id="empresa_dep_ref" name="empresa_dep_ref" type="text" class="form-control" dmx-bind:value="">
+                    </div>
+                    <div class="form-group mb-3"> <label for="input2" class="form-label">Descrição</label>
+                        <textarea id="descricao_departamento_ipt" class="form-control" name="descricao_departamento_ipt"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" dmx-on:click="form_departamento.submit()">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <header class="bg-black p-3">
     <div class="container-fluid">
         <div class="row align-items-center">
@@ -7,7 +32,7 @@
                 <p class="m-0 text-white-50 subtitulo">A nice paragraph</p>
             </div>
             <div class="col text-end">
-                <button id="btn1" class="btn btn-light">Button</button>
+                <button id="btn1" class="btn btn-outline-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvas_departamento">Adicionar novo departamento</button>
             </div>
         </div>
     </div>
