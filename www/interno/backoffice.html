@@ -17,10 +17,12 @@
 </head>
 
 <body is="dmx-app" id="backoffice">
+    <dmx-local-manager id="usuario"></dmx-local-manager><dmx-serverconnect id="usuario_atual" url="http://localhost:3000/api/electron/perfil-usuario" site="rks-controller" dmx-param:id_usuario="usuario.data.id" dmx-param:id="usuario.data.id"></dmx-serverconnect>
     <!-- Initialize user data on page load -->
     <script>
         const DEFAULT_AVATAR = '../assets/images/avatar.jpg';
         const DEFAULT_AVATAR_SVG = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23999%22%3E%3Cpath d=%22M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z%22/%3E%3C/svg%3E';
+        let profileMenuOpen = false;
 
         // Handle image loading errors
         function handleImageError(img) {
@@ -28,37 +30,42 @@
             img.src = DEFAULT_AVATAR_SVG;
         }
 
-        // Toggle Profile Menu
+        // Toggle Profile Menu - Optimized
         function toggleProfileMenu() {
             const dropdown = document.getElementById('profile_dropdown');
-            if (dropdown) {
-                dropdown.classList.toggle('active');
-                
-                // Close menu when clicking outside
-                document.addEventListener('click', function closeMenu(e) {
-                    if (!dropdown.contains(e.target)) {
-                        dropdown.classList.remove('active');
-                        document.removeEventListener('click', closeMenu);
-                    }
-                });
+            if (!dropdown) return;
+            
+            profileMenuOpen = !profileMenuOpen;
+            
+            if (profileMenuOpen) {
+                dropdown.classList.add('active');
+            } else {
+                dropdown.classList.remove('active');
             }
         }
+
+        // Close profile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('profile_dropdown');
+            if (dropdown && !dropdown.contains(e.target) && profileMenuOpen) {
+                dropdown.classList.remove('active');
+                profileMenuOpen = false;
+            }
+        }, { passive: true });
 
         // Close profile menu when an item is clicked
         document.addEventListener('DOMContentLoaded', function() {
             const menuItems = document.querySelectorAll('.profile-menu-item');
             menuItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    if (this.tagName === 'A') {
-                        e.preventDefault();
-                    }
+                item.addEventListener('click', function() {
                     const dropdown = document.getElementById('profile_dropdown');
                     if (dropdown) {
                         dropdown.classList.remove('active');
+                        profileMenuOpen = false;
                     }
-                });
+                }, { passive: true });
             });
-        });
+        }, { passive: true });
 
         // Logout function
         function logout() {
@@ -71,9 +78,7 @@
                     localStorage.removeItem('usuario');
                 }
                 // Redirecionar para login
-                setTimeout(() => {
-                    window.location.href = '../login.html';
-                }, 300);
+                window.location.href = '../login.html';
             }
         }
 
@@ -98,7 +103,7 @@
             }
         }
     </script>
-    <dmx-local-manager id="usuario"></dmx-local-manager>
+
     <header class="bg-black border-top border-secondary">
         <div class="container-fluid p-3">
             <div class="row align-items-center">
@@ -140,8 +145,8 @@
                         <div class="profile-dropdown" id="profile_dropdown">
                             <button class="profile-toggle" onclick="toggleProfileMenu()" type="button">
                                 <div class="profile-info">
-                                    <h6 class="profile-user-name" dmx-text="usuario.nome || 'Usuário'"></h6>
-                                    <p class="profile-company-name" dmx-text="usuario.empresa || 'Empresa'"></p>
+                                    <h6 class="profile-user-name">{{usuario_atual.data.query_usuario.nome_completo}}</h6>
+                                    <p class="profile-company-name">{{usuario_atual.data.query_usuario['e-mail']}}</p>
                                 </div>
                                 <div class="profile-avatar">
                                     <img id="profile_img" src="../assets/images/avatar.jpg" alt="Avatar" class="rounded-2" dmx-bind:src="usuario.avatar || '../assets/images/avatar.jpg'" onerror="handleImageError(this)" crossorigin="anonymous">
@@ -160,7 +165,7 @@
                                     <i class="bi bi-question-circle"></i>
                                     <span>Ajuda</span>
                                 </a>
-                                <button class="profile-menu-item">
+                                <button class="profile-menu-item" onclick="logout()">
                                     <i class="bi bi-box-arrow-right"></i>
                                     <span>Sair</span>
                                 </button>

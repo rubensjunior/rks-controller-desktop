@@ -8,6 +8,60 @@
     background-attachment: fixed;
 }
 
+/* Navigation Dropdown Styles */
+.nav-item.dropdown .nav-link {
+    padding: 0.5rem 0.75rem !important;
+    color: #ffffff !important;
+    transition: all 0.2s ease;
+    display: inline-block;
+    margin-right: 0.5rem;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.nav-item.dropdown .nav-link:hover {
+    color: #ffffff !important;
+}
+
+.nav-item.dropdown .dropdown-menu {
+    background-color: rgba(30, 30, 30, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 0;
+    margin-top: 0.25rem;
+    will-change: transform, opacity;
+}
+
+.nav-item.dropdown .dropdown-menu.show {
+    animation: none;
+}
+
+.nav-item.dropdown .dropdown-item {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.75rem 1rem;
+    transition: all 0.15s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.95rem;
+    background-color: transparent;
+}
+
+.nav-item.dropdown .dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.nav-item.dropdown .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding-left: 1.25rem;
+}
+
+.nav-item.dropdown .dropdown-item.active,
+.nav-item.dropdown .dropdown-item:active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+
 /* Profile Menu Dropdown Styles */
 .profile-dropdown {
     position: relative;
@@ -105,6 +159,7 @@
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
+    will-change: transform, opacity;
 }
 
 .profile-dropdown.active .profile-menu {
@@ -175,6 +230,12 @@
     .profile-menu {
         min-width: 180px;
     }
+
+    .nav-item.dropdown .nav-link {
+        padding: 0.4rem 0.6rem !important;
+        font-size: 0.9rem;
+        margin-right: 0.3rem;
+    }
 }
 
 /* Avoid profile menu going off-screen on mobile */
@@ -183,5 +244,15 @@
         min-width: 160px;
         left: 0;
         right: auto;
+    }
+
+    .nav-item.dropdown .nav-link {
+        padding: 0.35rem 0.5rem !important;
+        font-size: 0.85rem;
+        margin-right: 0.2rem;
+    }
+
+    .nav-item.dropdown .dropdown-menu {
+        min-width: 150px;
     }
 }
