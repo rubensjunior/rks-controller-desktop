@@ -23,3 +23,11 @@
 .subtitulo{
     font-size: 13px;
 }
+.bg-abstract {
+    border: none !important;
+    position: relative;
+    background-image: url(../assets/images/abstract-4.svg);
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size: auto;
+}

@@ -1,4 +1,6 @@
-<!-- Wappler include head-page="backoffice.html" is="dmx-app" id="departamentos" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Offcanvas:{},dmxBootstrap5Modal:{}}" -->
+<!-- Wappler include head-page="backoffice.html" is="dmx-app" id="departamentos" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Offcanvas:{},dmxBootstrap5Modal:{}}" fontawesome_4="local" -->
+<dmx-serverconnect id="listar_departamentos" url="http://localhost:3000/api/electron/cadastros/lista-departamentos" site="rks-controller" dmx-param:id_empresa="usuario_atual.data.query_usuario.empresa_selecionada"></dmx-serverconnect>
+
 <div class="modal" id="modal_departamento" is="dmx-bs5-modal" tabindex="-1" nocloseonclick="true" nokeyboard="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -37,3 +39,16 @@
         </div>
     </div>
 </header>
+<div class="container-fluid px-3 pt-4">
+    <div class="row" is="dmx-repeat" id="repeat_departamentos" dmx-bind:repeat="listar_departamentos.data.query" key="dep_id">
+        <div class="col-3">
+            <div class="card bg-abstract shadow">
+                <div class="card-body p-4">
+                    <h4 class="card-title">{{nome_departamento}}</h4>
+                    <p class="card-text">{{descricao_departamento}}</p>
+                    <a href="#" class="btn btn-secondary"><i class="fa fa-pencil-square-o"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

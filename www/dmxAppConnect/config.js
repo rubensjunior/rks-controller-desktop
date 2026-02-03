@@ -26,5 +26,32 @@ dmx.config({
         "name": "id"
       }
     ]
+  },
+  "departamentos": {
+    "repeat_departamentos": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "dep_id"
+        },
+        {
+          "type": "datetime",
+          "name": "created_at"
+        },
+        {
+          "type": "number",
+          "name": "empresa_dep_ref"
+        },
+        {
+          "type": "text",
+          "name": "nome_departamento"
+        },
+        {
+          "type": "text",
+          "name": "descricao_departamento"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });
