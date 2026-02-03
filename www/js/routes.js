@@ -24,5 +24,13 @@ dmx.routing.routes = [
   {
     "path": "/interno/fontes-financiamento",
     "url": "../interno/fontes-financiamento.html"
+  },
+  {
+    "path": "/interno/usuarios-acessos",
+    "url": "./interno/usuarios-acessos.html"
+  },
+  {
+    "path": "/interno/perfil-empresa",
+    "url": "./interno/perfil-empresa.html"
   }
 ]

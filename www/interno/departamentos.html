@@ -31,7 +31,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Atualização de departamento - {{data_departamento.data.dep_id}}</h5>
+                <h5 class="modal-title">Atualização de departamento</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="form_editar_departamento.reset();data_departamento.select(0);modal_editar_departamento.hide()"></button>
             </div>
             <div class="modal-body">
@@ -47,7 +47,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="form_editar_departamento.reset();data_departamento.select(0);modal_editar_departamento.hide()">Cancelar</button>
-                <button type="button" class="btn btn-primary" dmx-on:click="form_editar_departamento.submit()">Cadastrar</button>
+                <button type="button" class="btn btn-primary" dmx-on:click="form_editar_departamento.submit()">Atualizar cadastro</button>
             </div>
         </div>
     </div>
@@ -68,11 +68,14 @@
 <div class="container-fluid px-3 pt-5">
     <div class="row g-4" is="dmx-repeat" id="repeat_departamentos" dmx-bind:repeat="listar_departamentos.data.query" key="dep_id">
         <div class="col-3">
-            <div class="card bg-abstract shadow">
+            <div class="card bg-abstract shadow h-100">
                 <div class="card-body p-4">
                     <h4 class="card-title">{{nome_departamento}}</h4>
                     <p class="card-text">{{descricao_departamento}}</p>
-                    <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal_editar_departamento" dmx-on:click="data_departamento.select(dep_id)"><i class="fa fa-pencil-square-o"></i></a>
+                    <div class="d-flex gap-3 flex-row justify-content-start align-items-center"><a class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_editar_departamento" dmx-on:click="data_departamento.select(dep_id)"><i class="fa fa-pencil-square-o"></i></a>
+                        <button id="btn2" class="btn btn-primary btn-sm">Adicionar membro</button>
+                    </div>
+
                 </div>
             </div>
         </div>
