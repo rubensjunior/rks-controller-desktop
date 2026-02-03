@@ -17,6 +17,9 @@
     background-attachment: fixed;*/
     background-color: #F3F6F9;
 }
+.header-superior{
+  background: linear-gradient(180deg, #0D0F17 0%, #000000 100%);
+}
 .subtitulo{
     font-size: 13px;
 }

@@ -23,11 +23,11 @@
 
 <body is="dmx-app" id="backoffice" class="bg-cinza">
 
-    <dmx-notifications id="notificacoes"></dmx-notifications>
+    <dmx-notifications id="notificacoes" position="bottom" align="center"></dmx-notifications>
     <div is="dmx-browser" id="navegacao"></div>
     <dmx-local-manager id="usuario"></dmx-local-manager>
     <dmx-serverconnect id="usuario_atual" url="http://localhost:3000/api/electron/perfil-usuario" site="rks-controller" dmx-param:id="usuario.data.id"></dmx-serverconnect>
-    <header class="p-3 bg-dark ps-0">
+    <header class="px-3 py-4 header-superior ps-0 border-bottom border-secondary">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col">
