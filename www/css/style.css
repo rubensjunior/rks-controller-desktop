@@ -58,3 +58,12 @@
 .table tbody tr:hover {
     background-color: #f8f9fa;
 }
+.titulo-tabela{
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #99a1b7 !important;
+}
+.texto-tabela{
+    font-size: 14px;
+    color: #78829d !important;
+}

@@ -1,6 +1,8 @@
-<!-- Wappler include head-page="backoffice.html" is="dmx-app" id="usuariosacessos" appConnect="local" bootstrap5="local" capacitor="local" fontawesome_4="local" components="{dmxBootstrap5Modal:{},dmxValidator:{},dmxBootstrap5TableGenerator:{}}" -->
+<!-- Wappler include head-page="backoffice.html" is="dmx-app" id="usuariosacessos" appConnect="local" bootstrap5="local" capacitor="local" fontawesome_4="local" components="{dmxBootstrap5Modal:{},dmxValidator:{},dmxBootstrap5TableGenerator:{},dmxDataTraversal:{}}" -->
+
 
 <dmx-serverconnect id="listar_usuarios" url="http://localhost:3000/api/electron/cadastros/listas-usuarios" site="rks-controller" dmx-param:id_empresa="usuario_atual.data.query_usuario.empresa_selecionada"></dmx-serverconnect>
+<dmx-data-detail id="data_usuario"></dmx-data-detail>
 <div class="modal" id="modalUusuarios" is="dmx-bs5-modal" tabindex="-1" nocloseonclick="true" nokeyboard="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -29,6 +31,34 @@
         </div>
     </div>
 </div>
+<div class="modal" id="modalEditarUsuarios" is="dmx-bs5-modal" tabindex="-1" nocloseonclick="true" nokeyboard="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastro de usuário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="form_cadastrar_usuario.reset()"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form_cadastrar_usuario1" is="dmx-serverconnect-form" method="post" action="http://localhost:3000/api/electron/cadastros/cadastrar-usuario" site="rks-controller" dmx-on:error="notificacoes.danger('Ocorreu um erro: '+lastError.status+lastError.message+lastError.response)" dmx-on:success="form_cadastrar_usuario.reset();modalUusuarios.hide();notificacoes.success(form_cadastrar_usuario.data.resposta)">
+                    <div class="form-group mb-3"> <label for="nome_edit_completo_ipt" class="form-label">Nome completo</label>
+                        <input type="text" class="form-control py-2" id="nome_edit_completo_ipt" name="nome_completo_ipt" aria-describedby="input1_help" required="" data-msg-required="Este é um campo obrigatório!">
+                        <input type="hidden" class="form-control py-2" id="usuario_ipt" name="usuario_ipt" aria-describedby="input1_help" dmx-bind:value="">
+                    </div>
+                    <div class="form-group mb-3"> <label for="cpf_iedit_pt" class="form-label">CPF</label>
+                        <input type="text" class="form-control py-2" id="cpf_iedit_pt" name="cpf_ipt" aria-describedby="input1_help1" required="" data-msg-required="Este é um campo obrigatório!">
+                    </div>
+                    <div class="form-group mb-3"> <label for="email_iedit_pt" class="form-label">E-mail</label>
+                        <input type="email" class="form-control py-2" id="email_iedit_pt" name="email_ipt" aria-describedby="input1_help2" required="" data-msg-required="Este é um campo obrigatório!" data-rule-email="" data-msg-email="Insira um e-mail válido.">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="form_cadastrar_usuario.reset();modalUusuarios.hide()">Cancelar</button>
+                <button type="button" class="btn btn-primary" dmx-on:click="form_cadastrar_usuario.submit()">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <header class="bg-black p-3">
     <div class="container-fluid">
         <div class="row align-items-center">
@@ -44,32 +74,34 @@
 </header>
 <div class="container-fluid pt-5">
     <div class="row px-5">
-        <div class="col p-4 rounded-3 bg-white">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nome completo</th>
-                            <th>E mail</th>
-                            <th>Apelido</th>
-                        </tr>
-                    </thead>
-                    <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="view1.listar_usuarios.data.query_usuarios.data" id="tableRepeat1">
-                        <tr>
-                            <td dmx-text="nome_completo"></td>
-                            <td dmx-text="['e-mail']"></td>
-                            <td dmx-text="apelido"></td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+        <div class="col p-4 rounded-3 bg-white shadow">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="titulo-tabela pb-3 bg-white">Nome completo</th>
+                        <th class="titulo-tabela pb-3 bg-white">Cpf</th>
+                        <th class="titulo-tabela pb-3 bg-white">E mail</th>
+                        <th scope="row" class="titulo-tabela pb-3 bg-white text-end">Ações</th>
+                    </tr>
+                </thead>
+                <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="view1.listar_usuarios.data.query_usuarios.data" id="tableRepeat2">
+                    <tr>
+                        <td dmx-text="nome_completo" class="py-3 texto-tabela"></td>
+                        <td dmx-text="cpf" class="py-3 texto-tabela"></td>
+                        <td dmx-text="$value['e-mail']" class="py-3 texto-tabela"></td>
+                        <td class="py-3 texto-tabela text-end">
+                            <div class="dropdown">
+                                <button id="dropdown1" class="btn dropdown-toggle btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações&nbsp;</button>
+                                <div class="dropdown-menu" aria-labelledby="dropdown1">
+                                    <a class="dropdown-item" href="#">Editar</a>
+                                    <a class="dropdown-item" href="#">Desativar</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </table>
         </div>
     </div>
 </div>
