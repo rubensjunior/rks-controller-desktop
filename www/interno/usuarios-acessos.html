@@ -1,4 +1,75 @@
-<!-- Wappler include head-page="backoffice.html" is="dmx-app" id="usuariosacessos" appConnect="local" bootstrap5="local" capacitor="local" fontawesome_4="local" -->
-<header>
-    <h1>Usuarios</h1>
+<!-- Wappler include head-page="backoffice.html" is="dmx-app" id="usuariosacessos" appConnect="local" bootstrap5="local" capacitor="local" fontawesome_4="local" components="{dmxBootstrap5Modal:{},dmxValidator:{},dmxBootstrap5TableGenerator:{}}" -->
+
+<dmx-serverconnect id="listar_usuarios" url="http://localhost:3000/api/electron/cadastros/listas-usuarios" site="rks-controller" dmx-param:id_empresa="usuario_atual.data.query_usuario.empresa_selecionada"></dmx-serverconnect>
+<div class="modal" id="modalUusuarios" is="dmx-bs5-modal" tabindex="-1" nocloseonclick="true" nokeyboard="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastro de usuário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="form_cadastrar_usuario.reset()"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form_cadastrar_usuario" is="dmx-serverconnect-form" method="post" action="http://localhost:3000/api/electron/cadastros/cadastrar-usuario" site="rks-controller" dmx-on:error="notificacoes.danger('Ocorreu um erro: '+lastError.status+lastError.message+lastError.response)" dmx-on:success="form_cadastrar_usuario.reset();modalUusuarios.hide();notificacoes.success(form_cadastrar_usuario.data.resposta)">
+                    <div class="form-group mb-3"> <label for="nome_completo_ipt" class="form-label">Nome completo</label>
+                        <input type="text" class="form-control py-2" id="nome_completo_ipt" name="nome_completo_ipt" aria-describedby="input1_help" required="" data-msg-required="Este é um campo obrigatório!">
+                        <input type="hidden" class="form-control py-2" id="empresa_ipt" name="empresa_ipt" aria-describedby="input1_help" dmx-bind:value="usuario_atual.data.query_usuario.empresa_selecionada">
+                    </div>
+                    <div class="form-group mb-3"> <label for="cpf_ipt" class="form-label">CPF</label>
+                        <input type="text" class="form-control py-2" id="cpf_ipt" name="cpf_ipt" aria-describedby="input1_help1" required="" data-msg-required="Este é um campo obrigatório!">
+                    </div>
+                    <div class="form-group mb-3"> <label for="email_ipt" class="form-label">E-mail</label>
+                        <input type="email" class="form-control py-2" id="email_ipt" name="email_ipt" aria-describedby="input1_help2" required="" data-msg-required="Este é um campo obrigatório!" data-rule-email="" data-msg-email="Insira um e-mail válido.">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="form_cadastrar_usuario.reset();modalUusuarios.hide()">Cancelar</button>
+                <button type="button" class="btn btn-primary" dmx-on:click="form_cadastrar_usuario.submit()">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<header class="bg-black p-3">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col">
+                <h4 class="text-light m-0 mb-1">Usuários</h4>
+                <p class="m-0 text-white-50 subtitulo">A nice paragraph</p>
+            </div>
+            <div class="col text-end">
+                <button id="btn1" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUusuarios">Adicionar novo usuário</button>
+            </div>
+        </div>
+    </div>
 </header>
+<div class="container-fluid pt-5">
+    <div class="row px-5">
+        <div class="col p-4 rounded-3 bg-white">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome completo</th>
+                            <th>E mail</th>
+                            <th>Apelido</th>
+                        </tr>
+                    </thead>
+                    <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="view1.listar_usuarios.data.query_usuarios.data" id="tableRepeat1">
+                        <tr>
+                            <td dmx-text="nome_completo"></td>
+                            <td dmx-text="['e-mail']"></td>
+                            <td dmx-text="apelido"></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

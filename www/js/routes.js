@@ -27,10 +27,10 @@ dmx.routing.routes = [
   },
   {
     "path": "/interno/usuarios-acessos",
-    "url": "./interno/usuarios-acessos.html"
+    "url": "../interno/usuarios-acessos.html"
   },
   {
     "path": "/interno/perfil-empresa",
-    "url": "./interno/perfil-empresa.html"
+    "url": "../interno/perfil-empresa.html"
   }
 ]

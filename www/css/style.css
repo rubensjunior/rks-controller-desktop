@@ -31,3 +31,30 @@
     background-repeat: no-repeat;
     background-size: auto;
 }
+
+/* Estilos para a tabela */
+.bg-white {
+    background-color: #FFFFFF;
+}
+
+.table-responsive {
+    border-radius: 4px;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    border-color: #dee2e6;
+    font-weight: 600;
+    background-color: #f8f9fa;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
