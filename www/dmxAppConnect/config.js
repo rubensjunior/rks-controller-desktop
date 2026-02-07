@@ -78,5 +78,69 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "usuariosacessos": {
+    "tableRepeat2": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "id_usuarios"
+        },
+        {
+          "type": "text",
+          "name": "nome_completo"
+        },
+        {
+          "type": "text",
+          "name": "cpf"
+        },
+        {
+          "type": "text",
+          "name": "e-mail"
+        },
+        {
+          "type": "text",
+          "name": "apelido"
+        }
+      ],
+      "outputType": "array"
+    },
+    "data_usuario": {
+      "meta": [
+        {
+          "name": "$index",
+          "type": "number"
+        },
+        {
+          "name": "$key",
+          "type": "text"
+        },
+        {
+          "name": "$value",
+          "type": "object"
+        },
+        {
+          "type": "text",
+          "name": "id_usuarios"
+        },
+        {
+          "type": "text",
+          "name": "nome_completo"
+        },
+        {
+          "type": "text",
+          "name": "cpf"
+        },
+        {
+          "type": "text",
+          "name": "e-mail"
+        },
+        {
+          "type": "text",
+          "name": "apelido"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });
