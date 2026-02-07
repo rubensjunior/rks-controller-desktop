@@ -29,48 +29,28 @@
 
 <body is="dmx-app" id="backoffice" class="bg-cinza">
 
+
     <dmx-notifications id="notificacoes" position="bottom" align="center"></dmx-notifications>
     <div is="dmx-browser" id="navegacao"></div>
     <dmx-local-manager id="usuario"></dmx-local-manager>
     <dmx-serverconnect id="usuario_atual" url="http://localhost:3000/api/electron/perfil-usuario" site="rks-controller" dmx-param:id="usuario.data.id"></dmx-serverconnect>
-    <header class="px-3 py-4 header-superior ps-0 border-bottom border-secondary">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col">
-                    <div class="nav w-100">
-                        <a class="nav-item nav-link text-white" href="/interno/home" internal="true">Dashboard</a>
-                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" id="dropdown1" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault()">Cadastros</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown1">
-                                <a class="dropdown-item" href="/interno/departamentos" internal="true">Departamentos</a>
-                                <a class="dropdown-item" href="/interno/fornecedores" internal="true">Fornecedores</a>
-                                <a class="dropdown-item" href="/interno/fontes-financiamento" internal="true">Fontes de financiamento</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" id="dropdown3" role="button" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault()">Configurações</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown3">
-                                <a class="dropdown-item" href="/interno/usuarios-acessos" internal="true">Usuários e acessos</a>
-                                <a class="dropdown-item" href="/interno/perfil-empresa" internal="true">Perfil da Empresa</a>
-                            </div>
-                        </div>
-                        <a class="nav-item nav-link text-danger" href="#" dmx-on:click="usuario.removeAll();navegacao.goto('../index.html')">Sair</a>
-                    </div>
-                </div>
-                <div class="col text-end">
-                    <div class="dropdown">
-                        <button id="dropdown2" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown button
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdown2">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+    <div class="container-fluid vh-100 border-top border-light-subtle">
+        <div class="row h-100">
+            <div class="col-3">
+                <div class="row h-100 bg-white">
+                    <div class="col-2 bg-sidebar-color border-end border-light-subtle py-4">
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <img src="../assets/images/duotune/abstract/abs014.svg">
+                            <h6 class="text-center">Home</h6>
+
                         </div>
                     </div>
+                    <div class="col bg-sidebartools-color border-end border-light-subtle"></div>
                 </div>
             </div>
+            <div class="col" is="dmx-view" id="view1"></div>
         </div>
-    </header>
-    <main is="dmx-view" id="view1"></main>
+    </div>
     <script src="../bootstrap/5/js/bootstrap.bundle.min.js"></script>
 </body>
 

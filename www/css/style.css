@@ -15,7 +15,13 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;*/
-    background-color: #F3F6F9;
+    background-color: #FFFFFF;
+}
+.bg-sidebartools-color{
+    background-color: #F7F8FA;
+}
+.bg-sidebar-color{
+    background-color: #FFFFFF;
 }
 .header-superior{
   background: linear-gradient(180deg, #0D0F17 0%, #000000 100%);
