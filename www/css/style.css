@@ -73,3 +73,16 @@
     font-size: 14px;
     color: #78829d !important;
 }
+.texto-menu-toolbar{
+    font-size: 12px;
+}
+
+/* ===== SIDEBAR TOGGLE ICON ===== */
+#toolbar img:first-child {
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+}
+
+#toolbar img:first-child:hover {
+    opacity: 0.8;
+}
