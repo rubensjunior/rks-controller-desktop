@@ -25,6 +25,7 @@
     <script src="../dmxAppConnect/dmxValidator/dmxValidator.js" defer></script>
     <script src="../js/mascara-cpf.js" defer></script>
     <link rel="stylesheet" href="../dmxAppConnect/dmxBootstrap5TableGenerator/dmxBootstrap5TableGenerator.css" />
+    <script src="../dmxAppConnect/dmxBootstrap5Collapse/dmxBootstrap5Collapse.js" defer></script>
 </head>
 
 <body is="dmx-app" id="backoffice" class="bg-cinza">
@@ -34,34 +35,50 @@
     <div is="dmx-browser" id="navegacao"></div>
     <dmx-local-manager id="usuario"></dmx-local-manager>
     <dmx-serverconnect id="usuario_atual" url="http://localhost:3000/api/electron/perfil-usuario" site="rks-controller" dmx-param:id="usuario.data.id"></dmx-serverconnect>
-    <dmx-toggle id="sidebar_toggle" checked="false"></dmx-toggle>
-    <div class="container-fluid vh-100 border-top border-light-subtle" dmx-class:sidebar-collapsed="sidebar_toggle.checked">
-        <div class="row h-100">
-            <div class="col-sm-1 bg-sidebar-color border-end border-light-subtle py-4" id="toolbar">
-                <div class="d-flex flex-column justify-content-center align-items-center mb-5 gap-1">
-                    <img src="../assets/images/duotune/general/gen010.svg" dmx-on:click="sidebar_toggle.toggle()" style="cursor: pointer;">
-
+    <header class="mb-3 p-3">
+        <div class="container-fluid rounded-4 bg-white p-3">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="m-0 fw-bold">Controller</h3>
                 </div>
-                <div class="d-flex flex-column justify-content-center align-items-center mb-4 gap-1">
-                    <img src="../assets/images/duotune/abstract/abs014.svg">
-                    <h6 class="text-center texto-menu-toolbar m-0">Home</h6>
+                <div class="col">
 
-                </div>
-                <div class="d-flex flex-column justify-content-center align-items-center mb-4 gap-1">
-                    <img src="../assets/images/duotune/finance/fin008.svg">
-                    <h6 class="text-center texto-menu-toolbar m-0">Gastos</h6>
+                    <div class="d-flex flex-row justify-content-end align-items-center gap-3">
+                        <div class="nav w-100 justify-content-end">
+                            <div class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="dropdown1" role="button" aria-haspopup="true" aria-expanded="false">Gastos</a>
+                                <div class="dropdown-menu mt-3" aria-labelledby="dropdown1">
+                                    <a class="dropdown-item" href="#">Solicitações</a><a class="dropdown-item" href="#">Compromissos</a>
 
-                </div>
-                <div class="d-flex flex-column justify-content-center align-items-center mb-4 gap-1">
-                    <img src="../assets/images/duotune/coding/cod001.svg">
-                    <h6 class="text-center texto-menu-toolbar m-0">Config</h6>
-
+                                    <a class="dropdown-item" href="#">Competências</a>
+                                    <a class="dropdown-item" href="#">Pagamentos</a>
+                                </div>
+                            </div>
+                            <div class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="dropdown2" role="button" aria-haspopup="true" aria-expanded="false">Projetos</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown2">
+                                    <a class="dropdown-item" href="#">Projetos</a>
+                                </div>
+                            </div>
+                            <div class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="dropdown3" role="button" aria-haspopup="true" aria-expanded="false">Cadastros</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown3">
+                                    <a class="dropdown-item" href="/interno/departamentos" internal="true">Departamentos</a>
+                                    <a class="dropdown-item" href="/interno/fornecedores" internal="true">Fornecedores</a>
+                                    <a class="dropdown-item" href="/interno/fontes-financiamento" internal="true">Fontes de financiamento</a>
+                                </div>
+                            </div>
+                            <div class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="dropdown4" role="button" aria-haspopup="true" aria-expanded="false">Configurações</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown4">
+                                    <a class="dropdown-item" href="/interno/usuarios-acessos" internal="true">Usuários e acessos</a>
+                                    <a class="dropdown-item" href="/interno/perfil-empresa" internal="true">Perfil da empresa</a>
+                                </div>
+                            </div>
+                        </div><button id="btn1" class="btn btn-dark" dmx-on:click="usuario.removeAll();navegacao.goto('/')"><i class="fa fa-align-right"></i><br></button>
+                    </div>
                 </div>
             </div>
-            <div class="col-2 bg-sidebartools-color border-end border-light-subtle" id="toolmenu" dmx-show="!sidebar_toggle.checked"></div>
-            <div class="col" is="dmx-view" id="view1"></div>
         </div>
-    </div>
+    </header>
+    <main is="dmx-view" id="view1" class="px-3"></main>
+
     <script src="../bootstrap/5/js/bootstrap.bundle.min.js"></script>
 </body>
 

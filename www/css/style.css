@@ -7,82 +7,17 @@
     background-size: cover;
     background-attachment: fixed;
 }
+
 .bg-cinza {
-    /*background-image: 
-        linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%),
-        url(../assets/images/bg-inicial.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;*/
-    background-color: #FFFFFF;
+    /*background: linear-gradient(to bottom, #FFFFFF 0%, #D8DADE 100%);*/
+    background-color: #E8EAEC;
 }
-.bg-sidebartools-color{
-    background-color: #F7F8FA;
-}
-.bg-sidebar-color{
-    background-color: #FFFFFF;
-}
-.header-superior{
-  background: linear-gradient(180deg, #0D0F17 0%, #000000 100%);
-}
-.subtitulo{
+
+.subtitulo {
     font-size: 13px;
-}
-.bg-abstract {
-    border: none !important;
-    position: relative;
-    background-image: url(../assets/images/abstract-4.svg);
-    background-position: top right;
-    background-repeat: no-repeat;
-    background-size: auto;
 }
 
 /* Estilos para a tabela */
 .bg-white {
     background-color: #FFFFFF;
-}
-
-.table-responsive {
-    border-radius: 4px;
-}
-
-.table {
-    margin-bottom: 0;
-}
-
-.table thead th {
-    border-color: #dee2e6;
-    font-weight: 600;
-    background-color: #f8f9fa;
-}
-
-.table tbody tr {
-    transition: background-color 0.2s ease;
-}
-
-.table tbody tr:hover {
-    background-color: #f8f9fa;
-}
-.titulo-tabela{
-    font-size: 13px;
-    text-transform: uppercase;
-    color: #99a1b7 !important;
-}
-.texto-tabela{
-    font-size: 14px;
-    color: #78829d !important;
-}
-.texto-menu-toolbar{
-    font-size: 12px;
-}
-
-/* ===== SIDEBAR TOGGLE ICON ===== */
-#toolbar img:first-child {
-    cursor: pointer;
-    transition: opacity 0.2s ease-in-out;
-}
-
-#toolbar img:first-child:hover {
-    opacity: 0.8;
 }
