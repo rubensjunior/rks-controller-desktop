@@ -1,6 +1,6 @@
 {
   "name": "wappler_desktop_app",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "dependencies": {
     "@capacitor/core": "^7.4.3",
     "@capacitor-community/electron": "*"
