@@ -36,25 +36,25 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Atualizar usuário</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="form_cadastrar_usuario.reset();data_usuario.select(0)"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="data_usuario.select(0);form_atualizar_usuario.reset()"></button>
             </div>
             <div class="modal-body">
-                <form id="form_cadastrar_usuario1" is="dmx-serverconnect-form" method="post" action="http://localhost:3000/api/electron/cadastros/cadastrar-usuario" site="rks-controller" dmx-on:error="notificacoes.danger('Ocorreu um erro: '+lastError.status+lastError.message+lastError.response)" dmx-on:success="form_cadastrar_usuario.reset();modalUusuarios.hide();notificacoes.success(form_cadastrar_usuario.data.resposta)">
+                <form id="form_atualizar_usuario" is="dmx-serverconnect-form" method="post" action="http://localhost:3000/api/electron/cadastros/atualizar-usuario" site="rks-controller" dmx-on:error="notificacoes.danger('Ocorreu um erro: '+lastError.status+lastError.message+lastError.response)" dmx-on:success="listar_usuarios.load({id_empresa: usuario_atual.data.query_usuario.empresa_selecionada});data_usuario.select(0);form_atualizar_usuario.reset();modalEditarUsuarios.hide();notificacoes.success('Usuario atualizado com sucesso!')">
                     <div class="form-group mb-3"> <label for="nome_edit_completo_ipt" class="form-label">Nome completo</label>
-                        <input type="text" class="form-control py-2" id="nome_edit_completo_ipt" name="nome_completo_ipt" aria-describedby="input1_help" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_usuario.data.nome_completo">
-                        <input type="hidden" class="form-control py-2" id="usuario_ipt" name="usuario_ipt" aria-describedby="input1_help" dmx-bind:value="data_usuario.data.id_usuarios">
+                        <input type="text" class="form-control py-2" id="nome_edit_completo_ipt" name="nome_edit_completo_ipt" aria-describedby="input1_help" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_usuario.data.nome_completo">
+                        <input type="hidden" class="form-control py-2" id="usuario_edit_ipt" name="usuario_edit_ipt" aria-describedby="input1_help" dmx-bind:value="data_usuario.data.id_usuarios">
                     </div>
-                    <div class="form-group mb-3"> <label for="cpf_iedit_pt" class="form-label">CPF</label>
-                        <input type="text" class="form-control py-2" id="cpf_iedit_pt" name="cpf_ipt" aria-describedby="input1_help1" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_usuario.data.cpf">
+                    <div class="form-group mb-3"> <label for="cpf_edit_ipt" class="form-label">CPF</label>
+                        <input type="text" class="form-control py-2" id="cpf_edit_ipt" name="cpf_edit_ipt" aria-describedby="input1_help1" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_usuario.data.cpf">
                     </div>
-                    <div class="form-group mb-3"> <label for="email_iedit_pt" class="form-label">E-mail</label>
-                        <input type="email" class="form-control py-2" id="email_iedit_pt" name="email_ipt" aria-describedby="input1_help2" required="" data-msg-required="Este é um campo obrigatório!" data-rule-email="" data-msg-email="Insira um e-mail válido." dmx-bind:value="data_usuario.data['e-mail']">
+                    <div class="form-group mb-3"> <label for="email_edit_ipt" class="form-label">E-mail</label>
+                        <input type="email" class="form-control py-2" id="email_edit_ipt" name="email_edit_ipt" aria-describedby="input1_help2" required="" data-msg-required="Este é um campo obrigatório!" data-rule-email="" data-msg-email="Insira um e-mail válido." dmx-bind:value="data_usuario.data['e-mail']">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="form_cadastrar_usuario.reset();modalUusuarios.hide();data_usuario.select(0)">Cancelar</button>
-                <button type="button" class="btn btn-primary" dmx-on:click="form_cadastrar_usuario.submit()">Atualizar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="form_atualizar_usuario.reset();data_usuario.select(0);modalEditarUsuarios.hide()">Cancelar</button>
+                <button type="button" class="btn btn-primary" dmx-on:click="form_atualizar_usuario.submit()">Atualizar</button>
             </div>
         </div>
     </div>
