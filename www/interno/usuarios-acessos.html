@@ -1,8 +1,29 @@
 <!-- Wappler include head-page="backoffice.html" is="dmx-app" id="usuariosacessos" appConnect="local" bootstrap5="local" capacitor="local" fontawesome_4="local" components="{dmxBootstrap5Modal:{},dmxValidator:{},dmxBootstrap5TableGenerator:{},dmxDataTraversal:{}}" -->
 
 
+
+
 <dmx-serverconnect id="listar_usuarios" url="http://localhost:3000/api/electron/cadastros/listas-usuarios" site="rks-controller" dmx-param:id_empresa="usuario_atual.data.query_usuario.empresa_selecionada"></dmx-serverconnect>
-<dmx-data-detail id="data_usuario" dmx-bind:data="listar_usuarios.data.query_usuarios.data" key="id_usuarios"></dmx-data-detail>
+<dmx-serverconnect id="desativar_usuario" noload="true" url="http://localhost:3000/api/electron/cadastros/desativar-usuario" site="rks-controller"></dmx-serverconnect><dmx-data-detail id="data_usuario" dmx-bind:data="listar_usuarios.data.query_usuarios.data" key="id_usuarios"></dmx-data-detail>
+<div class="modal" id="modal_desativar" is="dmx-bs5-modal" tabindex="-1" nocloseonclick="true" nokeyboard="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Desativar colaborador</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <i class="fa fa-exclamation-circle fa-4x text-danger mb-3"></i>
+                <p class="text-center">Você está prestes a desativar o colaborador(a) <b>{{data_usuario.data.nome_completo}}</b>. Essa ação é irreversível. Para reativar, será necessário abrir um chamado de suporte. Deseja continuar?</p>
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex justify-content-center w-100 gap-3"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger" dmx-on:click="desativar_usuario.load({id_usuario: data_usuario.data.id_usuarios, id_empresa: usuario_atual.data.query_usuario.empresa_selecionada});notificacoes.success(desativar_usuario.lastError.status+desativar_usuario.lastError.message+desativar_usuario.lastError.response);modal_desativar.hide();data_usuario.select(0)">Sim! Quero continuar!</button></div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal" id="modalUusuarios" is="dmx-bs5-modal" tabindex="-1" nocloseonclick="true" nokeyboard="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -95,7 +116,7 @@
                                 <button id="dropdown1" class="btn dropdown-toggle btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações&nbsp;</button>
                                 <div class="dropdown-menu" aria-labelledby="dropdown1">
                                     <button id="btn2" class="btn w-100 text-start text-primary" data-bs-toggle="modal" data-bs-target="#modalEditarUsuarios" dmx-on:click="data_usuario.select(id_usuarios)">Editar</button>
-                                    <button id="btn3" class="btn w-100 text-start text-danger">Desativar</button>
+                                    <button id="btn3" class="btn w-100 text-start text-danger" data-bs-toggle="modal" data-bs-target="#modal_desativar" dmx-on:click="data_usuario.select(id_usuarios)">Desativar</button>
                                 </div>
                             </div>
                         </td>
