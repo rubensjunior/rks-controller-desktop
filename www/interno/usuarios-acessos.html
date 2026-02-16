@@ -4,7 +4,7 @@
 
 
 <dmx-serverconnect id="listar_usuarios" url="http://localhost:3000/api/electron/cadastros/listas-usuarios" site="rks-controller" dmx-param:id_empresa="usuario_atual.data.query_usuario.empresa_selecionada"></dmx-serverconnect>
-<dmx-serverconnect id="desativar_usuario" noload="true" url="http://localhost:3000/api/electron/cadastros/desativar-usuario" site="rks-controller"></dmx-serverconnect><dmx-data-detail id="data_usuario" dmx-bind:data="listar_usuarios.data.query_usuarios.data" key="id_usuarios"></dmx-data-detail>
+<dmx-serverconnect id="desativar_usuario" noload="true" url="http://localhost:3000/api/electron/cadastros/desativar-usuario" site="rks-controller" dmx-on:error="notificacoes.danger('Ocorreu um erro: '+lastError.status+lastError.message+lastError.response+'. Entre em contato com o suporte.')" dmx-on:success="notificacoes.success('Usuário desativado com sucesso!')"></dmx-serverconnect><dmx-data-detail id="data_usuario" dmx-bind:data="listar_usuarios.data.query_usuarios.data" key="id_usuarios"></dmx-data-detail>
 <div class="modal" id="modal_desativar" is="dmx-bs5-modal" tabindex="-1" nocloseonclick="true" nokeyboard="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -17,7 +17,7 @@
                 <p class="text-center">Você está prestes a desativar o colaborador(a) <b>{{data_usuario.data.nome_completo}}</b>. Essa ação é irreversível. Para reativar, será necessário abrir um chamado de suporte. Deseja continuar?</p>
             </div>
             <div class="modal-footer">
-                <div class="d-flex justify-content-center w-100 gap-3"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger" dmx-on:click="desativar_usuario.load({id_usuario: data_usuario.data.id_usuarios, id_empresa: usuario_atual.data.query_usuario.empresa_selecionada});notificacoes.success(desativar_usuario.lastError.status+desativar_usuario.lastError.message+desativar_usuario.lastError.response);modal_desativar.hide();data_usuario.select(0)">Sim! Quero continuar!</button></div>
+                <div class="d-flex justify-content-center w-100 gap-3"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger" dmx-on:click="listar_usuarios.load({id_empresa: usuario_atual.data.query_usuario.empresa_selecionada});desativar_usuario.load({id_usuario: data_usuario.data.id_usuarios, id_empresa: usuario_atual.data.query_usuario.empresa_selecionada});modal_desativar.hide();data_usuario.select(0)">Sim! Quero continuar!</button></div>
 
 
             </div>
@@ -102,18 +102,20 @@
                         <th class="titulo-tabela pb-3 bg-white">Nome completo</th>
                         <th class="titulo-tabela pb-3 bg-white">Cpf</th>
                         <th class="titulo-tabela pb-3 bg-white">E mail</th>
+                        <th class="titulo-tabela pb-3 bg-white">Status</th>
                         <th scope="row" class="titulo-tabela pb-3 bg-white text-end">Ações</th>
                     </tr>
                 </thead>
-                <tbody is="dmx-repeat" dmx-generator="bs5table" id="tableRepeat2" dmx-bind:repeat="listar_usuarios.data.query_usuarios.data" key="id_usuarios">
+                <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="listar_usuarios.data.query_usuarios.data" id="tableRepeat1">
                     <tr>
-                        <td dmx-text="nome_completo" class="py-3 texto-tabela"></td>
-                        <td dmx-text="cpf" class="py-3 texto-tabela"></td>
-                        <td dmx-text="$value['e-mail']" class="py-3 texto-tabela"></td>
-                        <td class="py-3 texto-tabela text-end">
+                        <td class="py-3 texto-tabela" dmx-text="nome_completo"></td>
+                        <td class="py-3 texto-tabela-secundario" dmx-text="cpf"></td>
+                        <td class="py-3 texto-tabela-secundario" dmx-text="$value['e-mail']"></td>
+                        <td class="py-3 texto-tabela-secundario"><span dmx-text="status_use" class="badge texto-tabela" dmx-class:text-bg-success="status_use == 'Ativo'" dmx-class:text-bg-warning="status_use == 'Inativo'"></span></td>
+                        <td class="py-3 text-end">
 
                             <div class="dropdown">
-                                <button id="dropdown1" class="btn dropdown-toggle btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações&nbsp;</button>
+                                <button id="dropdown1" class="btn dropdown-toggle btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" dmx-show="status_use=='Ativo'">Ações&nbsp;</button>
                                 <div class="dropdown-menu" aria-labelledby="dropdown1">
                                     <button id="btn2" class="btn w-100 text-start text-primary" data-bs-toggle="modal" data-bs-target="#modalEditarUsuarios" dmx-on:click="data_usuario.select(id_usuarios)">Editar</button>
                                     <button id="btn3" class="btn w-100 text-start text-danger" data-bs-toggle="modal" data-bs-target="#modal_desativar" dmx-on:click="data_usuario.select(id_usuarios)">Desativar</button>
