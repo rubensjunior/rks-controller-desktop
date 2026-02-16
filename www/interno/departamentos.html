@@ -1,7 +1,33 @@
-<!-- Wappler include head-page="backoffice.html" is="dmx-app" id="departamentos" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Offcanvas:{},dmxBootstrap5Modal:{},dmxDataTraversal:{}}" fontawesome_4="local" -->
+<!-- Wappler include head-page="backoffice.html" is="dmx-app" id="departamentos" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Offcanvas:{},dmxBootstrap5Modal:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{}}" fontawesome_4="local" -->
+
+
 <dmx-data-detail id="data_departamento" dmx-bind:data="listar_departamentos.data.query" key="dep_id"></dmx-data-detail>
 <dmx-serverconnect id="listar_departamentos" url="http://localhost:3000/api/electron/cadastros/lista-departamentos" site="rks-controller" dmx-param:id_empresa="usuario_atual.data.query_usuario.empresa_selecionada"></dmx-serverconnect>
 
+<dmx-serverconnect id="listar_membros" url="http://localhost:3000/api/electron/cadastros/listas-usuarios" site="rks-controller" dmx-param:id_empresa="usuario_atual.data.query_usuario.empresa_selecionada"></dmx-serverconnect>
+<div class="modal" id="modal_membros" is="dmx-bs5-modal" tabindex="-1" nocloseonclick="true" nokeyboard="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{data_departamento.data.nome_departamento}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click=""></button>
+            </div>
+            <div class="modal-body">
+                <form id="form_membro">
+                    <div class="form-group mb-3"> <label for="input1" class="form-label">Colaborador</label>
+                        <select id="select_membro" class="form-select py-2" dmx-bind:options="listar_membros.data.query_usuarios.data" optiontext="nome_completo" optionvalue="id_usuarios">
+                            <option value="">Selecione um membro</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal" id="modal_departamento" is="dmx-bs5-modal" tabindex="-1" nocloseonclick="true" nokeyboard="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -52,12 +78,11 @@
         </div>
     </div>
 </div>
-<header class="bg-dark p-3">
+<header class="mb-4">
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col">
-                <h4 class="text-light m-0 mb-1">Departamentos</h4>
-                <p class="m-0 text-white-50 subtitulo">A nice paragraph</p>
+                <h4 class="m-0 mb-1">Departamentos</h4>
             </div>
             <div class="col text-end">
                 <button id="btn1" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_departamento">Adicionar novo departamento</button>
@@ -66,18 +91,33 @@
     </div>
 </header>
 <div class="container-fluid">
-    <div class="row g-4" is="dmx-repeat" id="repeat_departamentos" dmx-bind:repeat="listar_departamentos.data.query" key="dep_id">
-        <div class="col-3">
-            <div class="card bg-abstract shadow h-100">
-                <div class="card-body p-4">
-                    <h4 class="card-title">{{nome_departamento}}</h4>
-                    <p class="card-text">{{descricao_departamento}}</p>
-                    <div class="d-flex gap-3 flex-row justify-content-start align-items-center"><a class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_editar_departamento" dmx-on:click="data_departamento.select(dep_id)"><i class="fa fa-pencil-square-o"></i></a>
-                        <button id="btn2" class="btn btn-primary btn-sm">Adicionar membro</button>
-                    </div>
-
-                </div>
-            </div>
+    <div class="row">
+        <div class="col p-4 rounded-3 bg-white">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="titulo-tabela pb-3 bg-white">Nome departamento</th>
+                        <th class="titulo-tabela pb-3 bg-white">Descricao departamento</th>
+                        <th class="titulo-tabela pb-3 bg-white text-end">Ações</th>
+                    </tr>
+                </thead>
+                <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="listar_departamentos.data.query" id="tableRepeat2" key="dep_id">
+                    <tr>
+                        <td dmx-text="nome_departamento" class="py-3 texto-tabela"></td>
+                        <td dmx-text="descricao_departamento" class="py-3 texto-tabela-secundario"></td>
+                        <td class="py-3 texto-tabela-secundario text-end">
+                            <div class="dropdown">
+                                <button id="dropdown1" class="btn dropdown-toggle btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações&nbsp;</button>
+                                <div class="dropdown-menu" aria-labelledby="dropdown1">
+                                    <button id="btn2" class="btn w-100 text-start text-primary" data-bs-target="#modal_editar_departamento" data-bs-toggle="modal" dmx-on:click="data_departamento.select(dep_id)">Editar</button>
+                                    <button id="btn4" class="btn w-100 text-start text-secondary" data-bs-target="#modal_membros" data-bs-toggle="modal" dmx-on:click="data_departamento.select(dep_id)">Adicionar membro</button>
+                                    <button id="btn3" class="btn w-100 text-start text-danger" data-bs-target="undefined">Desativar</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
