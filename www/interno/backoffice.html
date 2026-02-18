@@ -31,16 +31,17 @@
 <body is="dmx-app" id="backoffice" class="bg-cinza">
 
 
+
     <dmx-notifications id="notificacoes" position="bottom" align="center"></dmx-notifications>
     <div is="dmx-browser" id="navegacao"></div>
     <dmx-local-manager id="usuario"></dmx-local-manager>
     <dmx-serverconnect id="usuario_atual" url="http://localhost:3000/api/electron/perfil-usuario" site="rks-controller" dmx-param:id="usuario.data.id"></dmx-serverconnect>
-    <header class="mb-3">
+    <header class="mb-3 border-top border-bottom">
         <div class="container-fluid bg-white p-3">
             <div class="row align-items-center">
                 <div class="col">
-                    <a href="" class="text-decoration-none text-black">
-                        <h3 class="m-0 fw-bold">Controller</h3>
+                    <button id="btn2" class="btn btn-light me-3"><i class="fa fa-bars fa-lg"></i><br></button><a href="/interno/home" class="text-decoration-none text-black" internal="true">
+                        <img src="../assets/images/LOGO-RKS-CONTROLLER-BRANCO-HORI.png" height="48">
                     </a>
 
                 </div>
@@ -74,13 +75,14 @@
                                     <a class="dropdown-item" href="/interno/perfil-empresa" internal="true">Perfil da empresa</a>
                                 </div>
                             </div>
-                        </div><button id="btn1" class="btn btn-dark" dmx-on:click="usuario.removeAll();navegacao.goto('/')"><i class="fa fa-align-right"></i><br></button>
+                        </div><button id="btn1" class="btn btn-dark" dmx-on:click="usuario.removeAll();navegacao.goto('/')"><i class="fa fa-sign-out"></i><br></button>
+
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    <main is="dmx-view" id="view1" class="px-3"></main>
+    <main is="dmx-view" id="view1" class="px-3 overflow-auto"></main>
 
     <script src="../bootstrap/5/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -3,7 +3,7 @@
     "basic": {
       "dark": "#0D0F17",
       "body-color": "#17191E",
-      "headings-font-family": "Inter:600",
+      "headings-font-family": "Inter:700",
       "font-family-base": "Inter:400"
     },
     "advanced": {}

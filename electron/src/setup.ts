@@ -116,8 +116,8 @@ export class ElectronCapacitorApp {
         : {
           titleBarStyle: 'hidden' as const,
           titleBarOverlay: {
-            color: '#0D0F17',
-            symbolColor: '#ffffff',
+            color: '#ffffff',
+            symbolColor: '#0D0F17',
             height: 30,
           },
         };
@@ -257,7 +257,7 @@ export class ElectronCapacitorApp {
         left: 0 !important;
         right: 0 !important;
         height: ${HEIGHT}px !important;
-        background: #0D0F17 !important;
+        background: #ffffff !important;
         z-index: 999999 !important;
         -webkit-app-region: drag !important;
         box-sizing: border-box !important;
@@ -273,7 +273,7 @@ export class ElectronCapacitorApp {
         height: ${HEIGHT}px !important;
         display: flex !important;
         align-items: center !important;
-        color: #ffffff  !important;
+        color: #0D0F17  !important;
         font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
         font-size: 12.5px !important;
         font-weight: 500 !important;
