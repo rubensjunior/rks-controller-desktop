@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="backoffice.html" is="dmx-app" id="departamentos" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Offcanvas:{},dmxBootstrap5Modal:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{}}" fontawesome_4="local" -->
+<!-- Wappler include head-page="backoffice.html" is="dmx-app" id="departamentos" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Offcanvas:{},dmxBootstrap5Modal:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxValidator:{}}" fontawesome_4="local" -->
 
 
 
@@ -19,7 +19,7 @@
                     <div class="form-group mb-3">
                         <input id="id_departamento" name="id_departamento" type="hidden" class="form-control" dmx-bind:value="data_departamento.data.dep_id">
                         <input id="id_empresa" name="id_empresa" type="hidden" class="form-control" dmx-bind:value="data_departamento.data.empresa_dep_ref"> <label for="input1" class="form-label">Colaborador</label>
-                        <select id="select_membro" class="form-select py-2" dmx-bind:options="listar_membros.data.query_usuarios.data" optiontext="nome_completo" optionvalue="id_usuarios" name="select_membro">
+                        <select id="select_membro" class="form-select py-2" dmx-bind:options="listar_membros.data.query_usuarios.data" optiontext="nome_completo" optionvalue="id_usuarios" name="select_membro" required="" data-msg-required="Este é um campo obrigatório!">
                             <option value="">Selecione um membro</option>
                         </select>
                     </div>
@@ -62,7 +62,7 @@
             <div class="modal-body">
                 <form id="form_departamento" is="dmx-serverconnect-form" method="post" action="http://localhost:3000/api/electron/cadastros/criar-departamento" site="rks-controller" dmx-on:error="notificacoes.danger('Ocorreu um erro: '+lastError.status+lastError.message+lastError.response)" dmx-on:success="listar_departamentos.load({id_empresa: usuario_atual.data.query_usuario.empresa_selecionada});form_departamento.reset();modal_departamento.hide();notificacoes.success('Departamento cadastrado com sucesso!')">
                     <div class="form-group mb-3"> <label for="nome_departamento_ipt" class="form-label">Nome do departamento</label>
-                        <input type="text" class="form-control py-2" id="nome_departamento_ipt" name="nome_departamento_ipt" aria-describedby="input1_help">
+                        <input type="text" class="form-control py-2" id="nome_departamento_ipt" name="nome_departamento_ipt" aria-describedby="input1_help" required="" data-msg-required="Este é um campo obrigatório!">
                         <input id="empresa_dep_ref" name="empresa_dep_ref" type="hidden" class="form-control" dmx-bind:value="usuario_atual.data.query_usuario.empresa_selecionada">
                     </div>
                     <div class="form-group mb-3"> <label for="input2" class="form-label">Descrição</label>
@@ -87,7 +87,7 @@
             <div class="modal-body">
                 <form id="form_editar_departamento" is="dmx-serverconnect-form" method="post" action="http://localhost:3000/api/electron/cadastros/atualizar-departamento" site="rks-controller" dmx-on:error="notificacoes.danger('Ocorreu um erro: '+lastError.status+lastError.message+lastError.response)" dmx-on:success="listar_departamentos.load({id_empresa: usuario_atual.data.query_usuario.empresa_selecionada});data_departamento.select(0);form_editar_departamento.reset();modal_editar_departamento.hide();notificacoes.success('Departamento atualizado com sucesso!')">
                     <div class="form-group mb-3"> <label for="editar_nome_departamento_ipt" class="form-label">Nome do departamento</label>
-                        <input type="text" class="form-control py-2" id="editar_nome_departamento_ipt" name="editar_nome_departamento_ipt" aria-describedby="input1_help" dmx-bind:value="data_departamento.data.nome_departamento">
+                        <input type="text" class="form-control py-2" id="editar_nome_departamento_ipt" name="editar_nome_departamento_ipt" aria-describedby="input1_help" dmx-bind:value="data_departamento.data.nome_departamento" required="" data-msg-required="Este é um campo obrigatório!">
                         <input id="id_departamento" name="id_departamento" type="hidden" class="form-control" dmx-bind:value="data_departamento.data.dep_id">
                     </div>
                     <div class="form-group mb-3"> <label for="input2" class="form-label">Descrição</label>
