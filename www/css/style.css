@@ -1,3 +1,90 @@
+/* Layout base com scroll adequado */
+html {
+    height: 100%;
+    overflow-y: auto;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Garantir que header não se move */
+body > header {
+    flex-shrink: 0;
+}
+
+/* Main recebe resto do espaço e permite scroll interno */
+body > main {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+}
+
+/* ===== CUSTOMIZAÇÃO DE SCROLLBAR ===== */
+/* Para Chrome, Safari e Edge */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #212529;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0d0e10;
+}
+
+/* Para Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #212529 transparent;
+}
+
+/* Aplicar customização específica para main */
+body > main::-webkit-scrollbar {
+    width: 8px;
+}
+
+body > main::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+body > main::-webkit-scrollbar-thumb {
+    background: #212529;
+    border-radius: 10px;
+}
+
+body > main::-webkit-scrollbar-thumb:hover {
+    background: #0d0e10;
+}
+
+/* Para elementos internos com scroll */
+.table-responsive::-webkit-scrollbar,
+.list-group::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb,
+.list-group::-webkit-scrollbar-thumb {
+    background: #212529;
+    border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover,
+.list-group::-webkit-scrollbar-thumb:hover {
+    background: #0d0e10;
+}
+
 .bg-inicial {
     background-image: 
         linear-gradient(90deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 60%),
@@ -37,4 +124,17 @@
 }
 .modal-title{
     font-weight: 600;
+}
+
+/* Garantir que containers internos também rolam corretamente */
+.container,
+.container-fluid {
+    width: 100%;
+}
+
+/* Para listas e divs que possam ficar grandes */
+[is="dmx-repeat"],
+.list-group,
+.table-responsive {
+    width: 100%;
 }
