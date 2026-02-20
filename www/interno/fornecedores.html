@@ -20,6 +20,7 @@
                         <div class="col">
                             <div class="form-group mb-3"> <label for="pf_nome" class="form-label">Nome completo</label>
                                 <input type="text" class="form-control py-2" id="pf_nome" name="pf_nome" aria-describedby="input1_help2">
+                                <input type="hidden" class="form-control py-2" id="pf_ref_empresa" name="pf_ref_empresa" aria-describedby="input1_help2" dmx-bind:value="usuario_atual.data.query_usuario.empresa_selecionada">
                             </div>
                         </div>
                         <div class="col">
@@ -91,6 +92,7 @@
                         <div class="col">
                             <div class="form-group mb-3"> <label for="pj_razao_social" class="form-label">Razão social</label>
                                 <input type="text" class="form-control py-2" id="pj_razao_social" name="pj_razao_social" aria-describedby="input1_help2">
+                                <input type="hidden" class="form-control py-2" id="pj_ref_empresa" name="pj_ref_empresa" aria-describedby="input1_help2" dmx-bind:value="usuario_atual.data.query_usuario.empresa_selecionada">
                             </div>
                         </div>
                         <div class="col">
