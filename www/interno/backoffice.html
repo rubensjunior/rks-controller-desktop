@@ -38,63 +38,39 @@
                         <img src="../assets/images/rks-controller-logo.png" height="32">
                     </a><button id="btn2" class="btn btn-outline-secondary btn-sm" dmx-on:click="run({condition:{outputType:'boolean',if:`sidebar_visibilidade.value==0`,then:{steps:{run:{outputType:'text',action:`sidebar_visibilidade.setValue(1)`}}},else:{steps:{run:{outputType:'text',action:`sidebar_visibilidade.setValue(0)`}}}}})"><i class="fa fa-bars fa-lg"></i><br></button></div>
             </div>
-            <div class="col-12 col-md-8 col-xl-10 py-2">
-                <div class="d-flex">
-                    <h4 class="m-0">{{navegacao.location.hostname}}</h4>
-                </div>
-                <div class="d-flex flex-row justify-content-end align-items-center gap-4">
-                    <div class="nav w-100 justify-content-end">
-                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle text-black" data-bs-toggle="dropdown" id="dropdown1" role="button" aria-haspopup="true" aria-expanded="false">Gastos</a>
-                            <div class="dropdown-menu mt-3" aria-labelledby="dropdown1">
-                                <a class="dropdown-item" href="#">Solicitações</a><a class="dropdown-item" href="#">Compromissos</a>
-
-                                <a class="dropdown-item" href="#">Competências</a>
-                                <a class="dropdown-item" href="#">Pagamentos</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle text-black" data-bs-toggle="dropdown" id="dropdown2" role="button" aria-haspopup="true" aria-expanded="false">Projetos</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown2">
-                                <a class="dropdown-item" href="#">Projetos</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle text-black" data-bs-toggle="dropdown" id="dropdown3" role="button" aria-haspopup="true" aria-expanded="false">Cadastros</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown3">
-                                <a class="dropdown-item" href="/interno/departamentos" internal="true">Departamentos</a>
-                                <a class="dropdown-item" href="/interno/fornecedores" internal="true">Fornecedores</a>
-                                <a class="dropdown-item" href="/interno/fontes-financiamento" internal="true">Fontes de financiamento</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown"><a class="nav-link dropdown-toggle text-black" data-bs-toggle="dropdown" id="dropdown4" role="button" aria-haspopup="true" aria-expanded="false">Configurações</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown4">
-                                <a class="dropdown-item" href="/interno/usuarios-acessos" internal="true">Usuários e acessos</a>
-                                <a class="dropdown-item" href="/interno/perfil-empresa" internal="true">Perfil da empresa</a>
-                            </div>
-                        </div>
-                    </div><button id="btn1" class="btn btn-dark" dmx-on:click="usuario.removeAll();navegacao.goto('/')"><i class="fa fa-sign-out"></i><br></button>
-
-                </div>
-            </div>
         </div>
         <div class="row h-100">
             <div class="col-12 col-md-4 col-xl-2 bg-dark py-3" id="sidebar" dmx-show="sidebar_visibilidade.value==0">
-                <div class="d-flex p-2 flex-row gap-2 align-items-center rounded-3 mb-4 bg-black">
+                <div class="d-flex flex-row gap-3 align-items-center mb-4">
                     <img src="../assets/images/avatar.jpg" height="56" class="rounded">
                     <div class="d-flex flex-column justify-content-center">
-                        <p class="m-0 small lh-1 text-secondary">Bem-vindo(a)</p>
+                        <p class="m-0 small lh-1 text-success">Bem-vindo(a)</p>
                         <p class="text-white m-0 lh-lg fw-bold">{{usuario_atual.data.query_usuario.nome_completo.split(' ')[0]}}</p>
                     </div>
                 </div>
                 <h6 class="titulo-menu">GASTOS</h6>
                 <div class="nav w-100 flex-column">
-                    <a class="nav-item nav-link font-menu ps-0" href="#">Link</a>
-                    <a class="nav-item nav-link font-menu ps-0" href="#">Link</a>
-                    <a class="nav-item nav-link font-menu ps-0" href="#">Link</a>
+                    <a class="nav-item nav-link font-menu" href="#">Solicitações</a>
+                    <a class="nav-item nav-link font-menu " href="#">Compromissos</a>
+                    <a class="nav-item nav-link font-menu " href="#">Competências</a>
+                    <a class="nav-item nav-link font-menu " href="#">Pagamentos</a>
                 </div>
-                <h6 class="titulo-menu my-2">GASTOS</h6>
+                <h6 class="titulo-menu my-2">Projetos</h6>
                 <div class="nav w-100 flex-column">
-                    <a class="nav-item nav-link font-menu ps-0" href="#">Link</a>
-                    <a class="nav-item nav-link font-menu ps-0" href="#">Link</a>
-                    <a class="nav-item nav-link font-menu ps-0" href="#">Link</a>
+                    <a class="nav-item nav-link font-menu " href="#">Projetos</a>
+                </div>
+                <h6 class="titulo-menu my-2">Cadastros</h6>
+                <div class="nav w-100 flex-column">
+                    <a class="nav-item nav-link font-menu " href="/interno/departamentos" internal="true">Departamentos</a>
+                    <a class="nav-item nav-link font-menu " href="/interno/fornecedores" internal="true">Fornecedores</a>
+                    <a class="nav-item nav-link font-menu " href="#">Fontes de financiamento<br></a>
+                </div>
+                <h6 class="titulo-menu my-2">Configurações</h6>
+
+
+                <div class="nav w-100 flex-column">
+                    <a class="nav-item nav-link font-menu " href="/interno/usuarios-acessos" internal="true">Usuários e acessos</a>
+                    <a class="nav-item nav-link font-menu " href="#">Perfil da empresa</a>
                 </div>
 
 

@@ -107,7 +107,7 @@
                 </thead>
                 <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="listar_usuarios.data.query_usuarios.data" id="tableRepeat1">
                     <tr>
-                        <td class="py-3 texto-tabela" dmx-text="nome_completo"></td>
+                        <td class="py-3 texto-tabela fw-bold" dmx-text="nome_completo"></td>
                         <td class="py-3 texto-tabela-secundario" dmx-text="cpf"></td>
                         <td class="py-3 texto-tabela-secundario" dmx-text="$value['e-mail']"></td>
                         <td class="py-3 texto-tabela-secundario"><span dmx-text="status_use" class="badge texto-tabela" dmx-class:text-bg-success="status_use == 'Ativo'" dmx-class:text-bg-warning="status_use == 'Inativo'"></span></td>

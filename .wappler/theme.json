@@ -9,7 +9,9 @@
       "enable-negative-margins": true,
       "enable-cssgrid": true,
       "enable-shadows": true,
-      "enable-gradients": true
+      "enable-gradients": true,
+      "primary": "#1B84FF",
+      "success": "#17c653"
     },
     "advanced": {}
   }
