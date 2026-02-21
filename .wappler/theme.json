@@ -1,10 +1,15 @@
 {
   "bootstrap5": {
     "basic": {
-      "dark": "#0D0F17",
+      "dark": "#0D0E12",
       "body-color": "#17191E",
       "headings-font-family": "Inter:700",
-      "font-family-base": "Inter:400"
+      "font-family-base": "Inter:400",
+      "body-tertiary-bg": "#F1F5F9",
+      "enable-negative-margins": true,
+      "enable-cssgrid": true,
+      "enable-shadows": true,
+      "enable-gradients": true
     },
     "advanced": {}
   }

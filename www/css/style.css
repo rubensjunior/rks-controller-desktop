@@ -37,6 +37,7 @@ body > main {
 ::-webkit-scrollbar-thumb {
     background: #212529;
     border-radius: 10px;
+    -webkit-transition: background 0.3s ease;
     transition: background 0.3s ease;
 }
 
@@ -97,7 +98,7 @@ body > main::-webkit-scrollbar-thumb:hover {
 
 .bg-cinza {
     /*background: linear-gradient(to bottom, #FFFFFF 0%, #D8DADE 100%);*/
-    background-color: #E8EAEC;
+    background-color: #FFFFFF;
 }
 
 .subtitulo {
@@ -137,4 +138,14 @@ body > main::-webkit-scrollbar-thumb:hover {
 .list-group,
 .table-responsive {
     width: 100%;
+}
+
+.titulo-menu{
+    font-size: 12px;
+    color: #99a1b7 !important;
+    font-weight: 600;
+}
+.font-menu{
+    font-size: 13px;
+    color: #ffffff !important;
 }

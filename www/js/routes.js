@@ -11,7 +11,8 @@ dmx.routing.routes = [
   },
   {
     "path": "/interno/home",
-    "url": "../interno/home.html"
+    "url": "../interno/home.html",
+    "name": "Dashboard"
   },
   {
     "path": "/interno/departamentos",
