@@ -110,21 +110,23 @@ export class ElectronCapacitorApp {
 
     const preloadPath = join(app.getAppPath(), 'build', 'src', 'preload.js');
 
-    const titleBarConfig =
-      process.platform === 'darwin'
-        ? { titleBarStyle: 'hiddenInset' as const }
-        : {
-          titleBarStyle: 'hidden' as const,
-          titleBarOverlay: {
-            color: '#ffffff',
-            symbolColor: '#0D0F17',
-            height: 30,
-          },
-        };
+    // COMENTADO - Configuração de frame/barra personalizada
+    // const titleBarConfig =
+    //   process.platform === 'darwin'
+    //     ? { titleBarStyle: 'hiddenInset' as const }
+    //     : {
+    //       titleBarStyle: 'hidden' as const,
+    //       titleBarOverlay: {
+    //         color: '#ffffff',
+    //         symbolColor: '#0D0F17',
+    //         height: 30,
+    //       },
+    //     };
 
     this.MainWindow = new BrowserWindow({
       icon,
-      ...titleBarConfig,
+      frame: false, // Remove completamente o frame/barra de título
+      // ...titleBarConfig, // COMENTADO - Frame personalizado desabilitado
       show: false,
       x: this.mainWindowState.x,
       y: this.mainWindowState.y,
@@ -192,7 +194,8 @@ export class ElectronCapacitorApp {
       this.loadMainWindow(this);
     }
 
-    this.setupTitleBar();
+    // COMENTADO - Barra de título personalizada desabilitada
+    // this.setupTitleBar();
 
     this.MainWindow.webContents.setWindowOpenHandler((details) => {
       return details.url.includes(this.customScheme)
@@ -227,72 +230,72 @@ export class ElectronCapacitorApp {
     });
   }
 
-  // 🔥 TITLE BAR PRETA COM TEXTO BRANCO (WINDOWS)
-  private setupTitleBar(): void {
-    const HEIGHT = 30;
-    const TITLE = app.getName();
-
-    const applyStyles = () => {
-      this.MainWindow.webContents.insertCSS(`
-      /* Evita scroll fantasma no wrapper */
-      html, body {
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        overflow: hidden !important;
-      }
-
-      /* Compensa a barra (empurra o app para baixo) */
-      body {
-        box-sizing: border-box !important;
-        padding-top: ${HEIGHT}px !important;
-      }
-
-      /* Barra preta (região arrastável) */
-      body::before {
-        content: '' !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        height: ${HEIGHT}px !important;
-        background: #ffffff !important;
-        z-index: 999999 !important;
-        -webkit-app-region: drag !important;
-        box-sizing: border-box !important;
-      }
-
-      /* Título branco */
-      body::after {
-        content: '${TITLE}' !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 12px !important;
-        right: 140px !important;
-        height: ${HEIGHT}px !important;
-        display: flex !important;
-        align-items: center !important;
-        color: #0D0F17  !important;
-        font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-        font-size: 12.5px !important;
-        font-weight: 500 !important;
-        z-index: 1000000 !important;
-        pointer-events: none !important;
-      }
-    `);
-    };
-
-    applyStyles();
-
-    this.MainWindow.webContents.on('did-navigate', () => {
-      setTimeout(applyStyles, 50);
-    });
-
-    this.MainWindow.webContents.on('did-finish-load', () => {
-      setTimeout(applyStyles, 50);
-    });
-  }
+  // COMENTADO - 🔥 TITLE BAR PRETA COM TEXTO BRANCO (WINDOWS)
+  // private setupTitleBar(): void {
+  //   const HEIGHT = 30;
+  //   const TITLE = app.getName();
+  //
+  //   const applyStyles = () => {
+  //     this.MainWindow.webContents.insertCSS(`
+  //     /* Evita scroll fantasma no wrapper */
+  //     html, body {
+  //       margin: 0 !important;
+  //       padding: 0 !important;
+  //       width: 100% !important;
+  //       height: 100% !important;
+  //       overflow: hidden !important;
+  //     }
+  //
+  //     /* Compensa a barra (empurra o app para baixo) */
+  //     body {
+  //       box-sizing: border-box !important;
+  //       padding-top: ${HEIGHT}px !important;
+  //     }
+  //
+  //     /* Barra preta (região arrastável) */
+  //     body::before {
+  //       content: '' !important;
+  //       position: fixed !important;
+  //       top: 0 !important;
+  //       left: 0 !important;
+  //       right: 0 !important;
+  //       height: ${HEIGHT}px !important;
+  //       background: #ffffff !important;
+  //       z-index: 999999 !important;
+  //       -webkit-app-region: drag !important;
+  //       box-sizing: border-box !important;
+  //     }
+  //
+  //     /* Título branco */
+  //     body::after {
+  //       content: '${TITLE}' !important;
+  //       position: fixed !important;
+  //       top: 0 !important;
+  //       left: 12px !important;
+  //       right: 140px !important;
+  //       height: ${HEIGHT}px !important;
+  //       display: flex !important;
+  //       align-items: center !important;
+  //       color: #0D0F17  !important;
+  //       font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  //       font-size: 12.5px !important;
+  //       font-weight: 500 !important;
+  //       z-index: 1000000 !important;
+  //       pointer-events: none !important;
+  //     }
+  //   `);
+  //   };
+  //
+  //   applyStyles();
+  //
+  //   this.MainWindow.webContents.on('did-navigate', () => {
+  //     setTimeout(applyStyles, 50);
+  //   });
+  //
+  //   this.MainWindow.webContents.on('did-finish-load', () => {
+  //     setTimeout(applyStyles, 50);
+  //   });
+  // }
 }
 
 // Set a CSP up for our application based on the custom scheme
@@ -303,30 +306,8 @@ export function setupContentSecurityPolicy(customScheme: string): void {
         ...details.responseHeaders,
         'Content-Security-Policy': [
           electronIsDev
-            ? `default-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* devtools://* data:;
-               script-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* 'unsafe-inline' 'unsafe-eval' blob:;
-               style-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* 'unsafe-inline' https://fonts.googleapis.com;
-               connect-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* https://* ws://* wss://* devtools://*;
-               img-src 'self' data: ${customScheme}://* http://* https://*;
-               font-src 'self' data: ${customScheme}://* http://* https://* https://fonts.googleapis.com https://fonts.gstatic.com;
-               media-src 'self' ${customScheme}://* http://* https://*;
-               frame-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:*;
-               object-src 'none';
-               form-action 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:*;
-               frame-ancestors 'self';
-               worker-src 'self' ${customScheme}://* blob:;`
-            : `default-src 'self' ${customScheme}://* data:;
-               script-src 'self' ${customScheme}://* 'unsafe-inline' blob:;
-               style-src 'self' ${customScheme}://* 'unsafe-inline' https://fonts.googleapis.com;
-               connect-src 'self' ${customScheme}://* https://* ws://* wss://*;
-               img-src 'self' data: ${customScheme}://* http://* https://*;
-               font-src 'self' data: ${customScheme}://* http://* https://* https://fonts.googleapis.com https://fonts.gstatic.com;
-               media-src 'self' ${customScheme}://* http://* https://*;
-               frame-src 'self' ${customScheme}://*;
-               object-src 'none';
-               form-action 'self' ${customScheme}://*;
-               frame-ancestors 'self';
-               worker-src 'self' ${customScheme}://* blob:;`,
+            ? `default-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* devtools://* data:; script-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:* https://* ws://* wss://* devtools://*; img-src 'self' data: ${customScheme}://* http://* https://*; font-src 'self' data: ${customScheme}://* http://* https://* https://fonts.googleapis.com https://fonts.gstatic.com; media-src 'self' ${customScheme}://* http://* https://*; frame-src 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:*; object-src 'none'; form-action 'self' ${customScheme}://* http://localhost:* http://127.0.0.1:*; frame-ancestors 'self'; worker-src 'self' ${customScheme}://* blob:;`
+            : `default-src 'self' ${customScheme}://* data:; script-src 'self' ${customScheme}://* 'unsafe-inline' blob:; style-src 'self' ${customScheme}://* 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' ${customScheme}://* https://* ws://* wss://*; img-src 'self' data: ${customScheme}://* http://* https://*; font-src 'self' data: ${customScheme}://* http://* https://* https://fonts.googleapis.com https://fonts.gstatic.com; media-src 'self' ${customScheme}://* http://* https://*; frame-src 'self' ${customScheme}://*; object-src 'none'; form-action 'self' ${customScheme}://*; frame-ancestors 'self'; worker-src 'self' ${customScheme}://* blob:;`,
         ],
       },
     });
