@@ -31,69 +31,88 @@
 
 <body is="dmx-app" id="backoffice" class="bg-cinza">
     <dmx-value id="sidebar_visibilidade" dmx-bind:value="0"></dmx-value>
-    <div class="wappler-block container-fluid vh-100">
-        <div class="row shadow-sm">
-            <div class="col-12 col-md-4 col-xl-2 bg-dark py-3">
-                <div class="d-flex justify-content-between align-items-center"><a href="/interno/home" class="text-decoration-none text-black" internal="true">
-                        <img src="../assets/images/rks-controller-logo.png" height="32">
-                    </a><button id="btn2" class="btn btn-outline-secondary btn-sm" dmx-on:click="run({condition:{outputType:'boolean',if:`sidebar_visibilidade.value==0`,then:{steps:{run:{outputType:'text',action:`sidebar_visibilidade.setValue(1)`}}},else:{steps:{run:{outputType:'text',action:`sidebar_visibilidade.setValue(0)`}}}}})"><i class="fa fa-bars fa-lg"></i><br></button></div>
-            </div>
-            <div class="col align-self-center text-end">
-                <button id="fechar" class="btn btn-danger">fechar</button>
-            </div>
 
-        </div>
-        <div class="row h-100">
-            <div class="col-12 col-md-4 col-xl-2 bg-dark py-3" id="sidebar" dmx-show="sidebar_visibilidade.value==0">
-                <div class="d-flex flex-row gap-3 align-items-center mb-4">
-                    <img src="../assets/images/avatar.jpg" height="56" class="rounded">
-                    <div class="d-flex flex-column justify-content-center">
-                        <p class="m-0 small lh-1 text-success">Bem-vindo(a)</p>
-                        <p class="text-white m-0 lh-lg fw-bold">{{usuario_atual.data.query_usuario.nome_completo.split(' ')[0]}}</p>
-                    </div>
-                </div>
-                <h6 class="titulo-menu">GASTOS</h6>
-                <div class="nav w-100 flex-column">
-                    <a class="nav-item nav-link font-menu" href="#">Solicitações</a>
-                    <a class="nav-item nav-link font-menu " href="#">Compromissos</a>
-                    <a class="nav-item nav-link font-menu " href="#">Competências</a>
-                    <a class="nav-item nav-link font-menu " href="#">Pagamentos</a>
-                </div>
-                <h6 class="titulo-menu my-2">Projetos</h6>
-                <div class="nav w-100 flex-column">
-                    <a class="nav-item nav-link font-menu " href="#">Projetos</a>
-                </div>
-                <h6 class="titulo-menu my-2">Cadastros</h6>
-                <div class="nav w-100 flex-column">
-                    <a class="nav-item nav-link font-menu " href="/interno/departamentos" internal="true">Departamentos</a>
-                    <a class="nav-item nav-link font-menu " href="/interno/fornecedores" internal="true">Fornecedores</a>
-                    <a class="nav-item nav-link font-menu " href="#">Fontes de financiamento<br></a>
-                </div>
-                <h6 class="titulo-menu my-2">Configurações</h6>
-
-
-                <div class="nav w-100 flex-column">
-                    <a class="nav-item nav-link font-menu " href="/interno/usuarios-acessos" internal="true">Usuários e acessos</a>
-                    <a class="nav-item nav-link font-menu " href="#">Perfil da empresa</a>
-                </div>
-
-
-
-
-            </div>
-            <div class="col px-3 overflow-auto" is="dmx-view" id="view1" "=""></div></div>
-    </div>
 
 
 
 
     <dmx-notifications id=" notificacoes" position="bottom" align="center"></dmx-notifications>
-                <div is="dmx-browser" id="navegacao"></div>
-                <dmx-local-manager id="usuario"></dmx-local-manager>
-                <dmx-serverconnect id="usuario_atual" url="http://localhost:3000/api/electron/perfil-usuario" site="rks-controller" dmx-param:id="usuario.data.id"></dmx-serverconnect>
+    <div is="dmx-browser" id="navegacao"></div>
+    <dmx-value id="paginas" dmx-bind:value="[
+  {path: '/interno/home', nome: 'Início'},
+  {path: '/interno/departamentos', nome: 'Departamentos'},
+  {path: '/interno/fornecedores', nome: 'Fornecedores'},
+  {path: '/interno/usuarios-acessos', nome: 'Usuários e Acessos'}
+]"></dmx-value>
+    <dmx-local-manager id="usuario"></dmx-local-manager>
+    <dmx-serverconnect id="usuario_atual" url="http://localhost:3000/api/electron/perfil-usuario" site="rks-controller" dmx-param:id="usuario.data.id"></dmx-serverconnect>
+    <div class="wappler-block container-fluid backoffice-container">
+        <div class="row backoffice-row">
+            <div class="sidebar-collapse-bar py-3 bg-dark text-center text-white" id="colcolapse">
+                <button id="btn1" class="btn btn-sm mb-5 btn-outline-light" dmx-on:click="run({condition:{outputType:'boolean',if:`sidebar_visibilidade.value==0`,then:{steps:{run:{outputType:'text',action:`sidebar_visibilidade.setValue(1)`}}},else:{steps:{run:{outputType:'text',action:`sidebar_visibilidade.setValue(0)`}}}}})"><i class="fa fa-bars fa-lg"></i><br></button>
+                <button id="btn3" class="btn btn-sm mb-3 btn-light"><i class="fa fa-bell-o fa-sm"></i><br></button>
+                <button id="btn4" class="btn btn-sm mb-3 btn-light"><i class="fa fa-question-circle-o fa-lg"></i><br></button>
+                <button id="btn5" class="btn btn-sm mb-3 btn-light"><i class="fa fa-sign-out"></i><br></button>
+            </div>
+            <div class="col-md-2 ps-3 bg-dark border-start border-secondary backoffice-sidebar" id="sidebar" dmx-show="sidebar_visibilidade.value==0">
+                <div class="py-3" id="tools">
+                    <a href="/interno/home" class="text-decoration-none text-black" internal="true">
+                        <img src="../assets/images/rks-controller-logo.png" height="32" class="mb-5">
+                    </a>
+                    <div class="d-flex flex-row gap-3 align-items-center mb-4">
+                        <img src="../assets/images/avatar.jpg" height="56" class="rounded">
+                        <div class="d-flex flex-column justify-content-center">
+                            <p class="m-0 small lh-1 text-success">Bem-vindo(a)</p>
+                            <p class="text-white m-0 lh-lg fw-bold">{{usuario_atual.data.query_usuario.nome_completo.split(' ')[0]}}</p>
+                        </div>
+                    </div>
+                    <h6 class="titulo-menu">GASTOS</h6>
+                    <div class="nav w-100 flex-column">
+                        <a class="nav-item nav-link font-menu" href="#">Solicitações</a>
+                        <a class="nav-item nav-link font-menu " href="#">Compromissos</a>
+                        <a class="nav-item nav-link font-menu " href="#">Competências</a>
+                        <a class="nav-item nav-link font-menu " href="#">Pagamentos</a>
+                    </div>
+                    <h6 class="titulo-menu my-2">Projetos</h6>
+                    <div class="nav w-100 flex-column">
+                        <a class="nav-item nav-link font-menu " href="#">Projetos</a>
+                    </div>
+                    <h6 class="titulo-menu my-2">Cadastros</h6>
+                    <div class="nav w-100 flex-column">
+                        <a class="nav-item nav-link font-menu " href="/interno/departamentos" internal="true">Departamentos</a>
+                        <a class="nav-item nav-link font-menu " href="/interno/fornecedores" internal="true">Fornecedores</a>
+                        <a class="nav-item nav-link font-menu " href="#">Fontes de financiamento<br></a>
+                    </div>
+                    <h6 class="titulo-menu my-2">Configurações</h6>
+                    <div class="nav w-100 flex-column">
+                        <a class="nav-item nav-link font-menu " href="/interno/usuarios-acessos" internal="true">Usuários e acessos</a>
+                        <a class="nav-item nav-link font-menu " href="#">Perfil da empresa</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col backoffice-main">
+                <div class="row px-2 border-bottom backoffice-topbar shadow-sm">
+                    <div class="col py-3 px-4 m-0">
 
-                <script src="../bootstrap/5/js/bootstrap.bundle.min.js">
-                </script>
+                        <div class="d-flex align-items-center justify-content-between p-0" id="breadcrumb">
+                            <div class="d-flex flex-column justify-content-center">
+                                <h5 class="fw-bold m-0 lh-base">Backoffice</h5>
+                                <h6 id="breadcrumb_titulo" class="titulo-menu">Home - <span dmx-text="paginas.value.where('path', navegacao.location.hash.replace('#!', ''), '==').first().nome.default('Backoffice')"></span></h6>
+                            </div>
+                            <button id="btn2" class="btn btn-light" dmx-on:click="navegacao.reload()"><i class="fa fa-repeat"></i></button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row backoffice-view-area">
+                    <div class="col p-4" is="dmx-view" id="view1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../bootstrap/5/js/bootstrap.bundle.min.js">
+    </script>
 </body>
 
 </html>

@@ -7,7 +7,8 @@ dmx.routing.routes = [
   },
   {
     "path": "/interno/backoffice",
-    "url": "../interno/backoffice.html"
+    "url": "../interno/backoffice.html",
+    "name": "Backoffice"
   },
   {
     "path": "/interno/home",
@@ -16,22 +17,27 @@ dmx.routing.routes = [
   },
   {
     "path": "/interno/departamentos",
-    "url": "../interno/departamentos.html"
+    "url": "../interno/departamentos.html",
+    "name": "Departamentos"
   },
   {
     "path": "/interno/fornecedores",
-    "url": "../interno/fornecedores.html"
+    "url": "../interno/fornecedores.html",
+    "name": "Fornecedores"
   },
   {
     "path": "/interno/fontes-financiamento",
-    "url": "../interno/fontes-financiamento.html"
+    "url": "../interno/fontes-financiamento.html",
+    "name": "Fontes de financiamento"
   },
   {
     "path": "/interno/usuarios-acessos",
-    "url": "../interno/usuarios-acessos.html"
+    "url": "../interno/usuarios-acessos.html",
+    "name": "Usuários e acessos"
   },
   {
     "path": "/interno/perfil-empresa",
-    "url": "../interno/perfil-empresa.html"
+    "url": "../interno/perfil-empresa.html",
+    "name": "Perfil da empresa"
   }
 ]

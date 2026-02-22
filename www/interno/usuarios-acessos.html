@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="backoffice.html" is="dmx-app" id="usuariosacessos" appConnect="local" bootstrap5="local" capacitor="local" fontawesome_4="local" components="{dmxBootstrap5Modal:{},dmxValidator:{},dmxBootstrap5TableGenerator:{},dmxDataTraversal:{}}" -->
+<!-- Wappler include head-page="backoffice.html" is="dmx-app" id="usuariosacessos" appConnect="local" bootstrap5="local" capacitor="local" fontawesome_4="local" components="{dmxBootstrap5Modal:{},dmxValidator:{},dmxBootstrap5TableGenerator:{},dmxDataTraversal:{},dmxFormatter:{}}" -->
 
 
 
@@ -80,21 +80,17 @@
         </div>
     </div>
 </div>
-<header class="my-5">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col">
-                <h4 class="m-0 mb-1">Usuários</h4>
-            </div>
-            <div class="col text-end">
-                <button id="btn1" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUusuarios">Adicionar</button>
-            </div>
+<div class="container-fluid p-4 rounded-4 border">
+    <div class="row align-items-center mb-4">
+        <div class="col">
+            <h4 class="m-0 mb-1">Usuários</h4>
+        </div>
+        <div class="col text-end">
+            <button id="btn1" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#modalUusuarios">Adicionar</button>
         </div>
     </div>
-</header>
-<div class="container-fluid">
     <div class="row">
-        <div class="col p-4 rounded-3 bg-white">
+        <div class="col">
             <table class="table">
                 <thead>
                     <tr>
@@ -107,11 +103,11 @@
                 </thead>
                 <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="listar_usuarios.data.query_usuarios.data" id="tableRepeat1">
                     <tr>
-                        <td class="py-3 texto-tabela fw-bold" dmx-text="nome_completo"></td>
-                        <td class="py-3 texto-tabela-secundario" dmx-text="cpf"></td>
-                        <td class="py-3 texto-tabela-secundario" dmx-text="$value['e-mail']"></td>
-                        <td class="py-3 texto-tabela-secundario"><span dmx-text="status_use" class="badge texto-tabela" dmx-class:text-bg-success="status_use == 'Ativo'" dmx-class:text-bg-warning="status_use == 'Inativo'"></span></td>
-                        <td class="py-3 text-end">
+                        <td class="texto-tabela-secundario" dmx-text="nome_completo"></td>
+                        <td class="texto-tabela-secundario" dmx-text="cpf"></td>
+                        <td class="texto-tabela-secundario" dmx-text="$value['e-mail']"></td>
+                        <td class="texto-tabela-secundario"><span dmx-text="status_use" class="badge texto-tabela" dmx-class:text-bg-success="status_use == 'Ativo'" dmx-class:text-bg-warning="status_use == 'Inativo'"></span></td>
+                        <td class="texto-tabela-secundario text-end">
 
                             <div class="dropdown">
                                 <button id="dropdown1" class="btn dropdown-toggle btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" dmx-show="status_use=='Ativo'">Ações&nbsp;</button>
@@ -124,6 +120,7 @@
                     </tr>
                 </tbody>
             </table>
+
             </table>
         </div>
     </div>

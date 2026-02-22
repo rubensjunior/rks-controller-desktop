@@ -1,11 +1,12 @@
-/* Layout base com scroll adequado */
+/* ===== LAYOUT BASE - FIXED VIEWPORT ===== */
 html {
     height: 100%;
-    overflow-y: auto;
+    overflow: hidden;
 }
 
 body {
-    min-height: 100vh;
+    height: 100%;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
@@ -15,12 +16,52 @@ body > header {
     flex-shrink: 0;
 }
 
-/* Main recebe resto do espaço e permite scroll interno */
+/* Main recebe resto do espaço sem scroll próprio */
 body > main {
+    flex: 1;
+    overflow: hidden;
+}
+
+/* ===== LAYOUT DO BACKOFFICE ===== */
+
+/* Container principal ocupa toda a viewport */
+.backoffice-container {
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Row principal ocupa 100% da altura */
+.backoffice-row {
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Sidebar com scroll próprio */
+.backoffice-sidebar {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+/* Coluna principal é flex column para dividir breadcrumb e view */
+.backoffice-main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Breadcrumb/header fixo no topo */
+.backoffice-topbar {
+    flex-shrink: 0;
+}
+
+/* Área da view ocupa o restante e tem scroll */
+.backoffice-view-area {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    padding-right: 8px;
+    min-height: 0; /* Importante para flex shrink funcionar */
 }
 
 /* ===== CUSTOMIZAÇÃO DE SCROLLBAR ===== */
@@ -51,24 +92,6 @@ body > main {
     scrollbar-color: #212529 transparent;
 }
 
-/* Aplicar customização específica para main */
-body > main::-webkit-scrollbar {
-    width: 8px;
-}
-
-body > main::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-body > main::-webkit-scrollbar-thumb {
-    background: #212529;
-    border-radius: 10px;
-}
-
-body > main::-webkit-scrollbar-thumb:hover {
-    background: #0d0e10;
-}
-
 /* Para elementos internos com scroll */
 .table-responsive::-webkit-scrollbar,
 .list-group::-webkit-scrollbar {
@@ -93,60 +116,63 @@ body > main::-webkit-scrollbar-thumb:hover {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
 }
 
+/* ===== SIDEBAR COLLAPSE BAR ===== */
+.sidebar-collapse-bar {
+    width: 64px;
+    min-width: 64px;
+    flex-shrink: 0;
+}
+
+/* ===== CORES ===== */
 .bg-cinza {
-    /*background: linear-gradient(to bottom, #FFFFFF 0%, #D8DADE 100%);*/
-    background-color: #FFFFFF;
+    background-color: #fff;
 }
 
+/* ===== TIPOGRAFIA ===== */
 .subtitulo {
     font-size: 13px;
 }
 
-/* Estilos para a tabela */
-.bg-white {
-    background-color: #FFFFFF;
-}
-.titulo-tabela{
-    font-weight: 600;
-    font-size: 12px;
-    color: #99a1b7 !important;
+.titulo-tabela {
     text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    color: #99a1b7;
 }
+
 .texto-tabela-secundario {
-    color: #78829d !important;
-    font-size: 14px;
+    font-size: 12px;
+    color: #78829d;
 }
+
 .texto-tabela {
     font-size: 14px;
-    font-weight: 500;
-}
-.modal-title{
-    font-weight: 600;
 }
 
-/* Garantir que containers internos também rolam corretamente */
+.modal-title {
+    font-weight: bold;
+}
+
+/* ===== CONTAINERS E ELEMENTOS COMUNS ===== */
 .container,
-.container-fluid {
-    width: 100%;
-}
-
-/* Para listas e divs que possam ficar grandes */
+.container-fluid,
 [is="dmx-repeat"],
 .list-group,
 .table-responsive {
     width: 100%;
 }
 
-.titulo-menu{
-    font-size: 12px;
-    color: #99a1b7 !important;
-    font-weight: 600;
+/* ===== MENUS ===== */
+.titulo-menu {
     text-transform: uppercase;
+    font-size: 12px;
+    color: #99a1b7;
+    font-weight: bold;
 }
-.font-menu{
+
+.font-menu {
     font-size: 13px;
-    color: #ffffff !important;
+    color: white;
 }
