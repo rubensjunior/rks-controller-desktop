@@ -22,20 +22,25 @@
 </head>
 
 <body is="dmx-app" id="index" class="bg-inicial" dmx-routing="routes.js">
-	<script is="dmx-flow" id="redirecionamento" type="text/dmx-flow" autorun="true">{
-  condition: {
-    outputType: "boolean",
-    if: "{{!usuario.data.id.isEmpty()}}",
-    then: {
-      steps: {
-        run: {
-          outputType: "text",
-          action: "{{navegacao.goto('interno/backoffice.html')}}"
+	<script is="dmx-flow" id="redirecionamento" type="text/dmx-flow" autorun="true">[
+  {
+    wait: {delay: 3000}
+  },
+  {
+    condition: {
+      outputType: "boolean",
+      if: "{{!usuario.data.id.isEmpty()}}",
+      then: {
+        steps: {
+          run: {
+            outputType: "text",
+            action: "{{navegacao.goto('interno/backoffice.html')}}"
+          }
         }
       }
     }
   }
-}</script>
+]</script>
 	<dmx-local-manager id="usuario"></dmx-local-manager>
 	<div is="dmx-browser" id="navegacao"></div>
 	<dmx-notifications id="notificacoes"></dmx-notifications>

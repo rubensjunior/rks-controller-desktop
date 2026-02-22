@@ -72,24 +72,24 @@ body > main {
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent;
+    background: #f1f1f4;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #212529;
+    background: #99a1b7;
     border-radius: 10px;
     -webkit-transition: background 0.3s ease;
     transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #0d0e10;
+    background: #78829d;
 }
 
 /* Para Firefox */
 * {
     scrollbar-width: thin;
-    scrollbar-color: #212529 transparent;
+    scrollbar-color: #99a1b7 #f1f1f4;
 }
 
 /* Para elementos internos com scroll */
@@ -100,13 +100,13 @@ body > main {
 
 .table-responsive::-webkit-scrollbar-thumb,
 .list-group::-webkit-scrollbar-thumb {
-    background: #212529;
+    background: #99a1b7;
     border-radius: 10px;
 }
 
 .table-responsive::-webkit-scrollbar-thumb:hover,
 .list-group::-webkit-scrollbar-thumb:hover {
-    background: #0d0e10;
+    background: #78829d;
 }
 
 .bg-inicial {
@@ -176,3 +176,4 @@ body > main {
     font-size: 13px;
     color: white !important;
 }
+.card-header{background-color: #fff !important;}
